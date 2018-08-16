@@ -1,35 +1,13 @@
-# Pacman
-alias pacs="sudo pacman -S"
-alias pacss="pacman -Ss"
-alias pacr="sudo pacman -R"
-alias pacsyu="sudo pacman -Syu"
-alias pacsyyu="sudo pacman -Syyu"
-
-# Common cli stuff
-alias mkpk="makepkg -cs"
-alias ls="ls -N --color"
-alias grep="grep --color=auto"
-alias sudo="sudo "
-alias adios="shutdown now"
-alias fk="urxvt & disown"
-alias dx="& disown && exit"
-alias xrload="xrdb -merge .Xresources"
+alias ls="ls --color=auto "
 alias nv="nvim "
-alias tmux="tmux -2"
-
-# rsync
-alias prv="rsync -rv --progress --append-verify"
-alias rra="rsync -r --append-verify"
-alias pra="rsync -r --progress --append-verify"
-
-# Applications
-alias zath="zathura"
-alias feh="feh -. --auto-rotate"
-
-# Git
-alias groot="git rev-parse --show-toplevel"
+alias note="~/.scripts/notes.sh"
 alias cdg='cd "$(git rev-parse --show-toplevel)"'
-alias gitc="git commit"
-alias gita="git add"
-alias gits="git status"
-alias gitd="git diff"
+alias groot='git rev-parse --show-toplevel'
+alias gitgitgitgitgotgotgotgot='cat ~/.gitgot'
+alias did="nvim +'normal Go' +'r!date' ~/did.txt"
+alias gita="git add "
+alias gitc="git commit "
+alias gitd="git diff "
+alias gits="git status "
+alias gitca="git commit -a"
+alias gitg="git grep"

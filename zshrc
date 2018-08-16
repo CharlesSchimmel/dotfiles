@@ -7,30 +7,31 @@ zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit && compinit
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=5000
+SAVEHIST=5000
 setopt appendhistory autocd extendedglob nomatch notify share_history
 bindkey -v
 
 export GIT_PROMPT_EXECUTABLE="haskell"
-source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+source $HOME/.zsh/zsh-git-prompt/zshrc.sh # for git prompt
 autoload -Uz promptinit && promptinit
-PROMPT='%F{cyan}%%%f '
+PROMPT='%F{blue}%%%f '
 RPROMPT='%~$(git_super_status)'
 
-autoload -U up-line-or-beginning-search down-line-or-beginning-search
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey '\eOc' forward-word # <C-{left,right}>
 bindkey '\eOd' backward-word
-bindkey '[A' up-line-or-beginning-search # up and down - for completing past commands
-bindkey '[B' down-line-or-beginning-search
+bindkey 'OA' up-line-or-beginning-search # up and down - for completing past commands
+bindkey 'OB' down-line-or-beginning-search
 bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
 
-export PATH=$PATH":$HOME/.local/bin"
+export PATH=$PATH":$HOME/.local/bin:$HOME/.npm-global/bin/"
 export EDITOR='nvim'
-source $HOME/.aliases
-source /usr/share/zsh/plugins/clipboard.zsh 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting
+source "$HOME/.aliases"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

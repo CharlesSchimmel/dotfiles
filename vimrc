@@ -1,85 +1,84 @@
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 " The Pope's Holy Plugins
 Plug 'tpope/vim-commentary'            " use gcc to comment lines
-Plug 'tpope/vim-fugitive'              " enhances netrw
+Plug 'tpope/vim-fugitive'              " git integration
 Plug 'tpope/vim-repeat'                " more advanced dot repetition
 Plug 'tpope/vim-sleuth'                " infers tab/space expansion from file
 Plug 'tpope/vim-surround'              " wrap stuff with ([{ etc
 Plug 'tpope/vim-vinegar'               " enhances netrw
 
 " Navigation/File Management
-Plug 'jremmen/vim-ripgrep'             " rg for vim
 Plug 'junegunn/fzf'                    " fuzzy file finder
+            \ , { 'dir':'~/.fzf', 'do':'./install --bin' }
 Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
 " IDE ish
-Plug 'w0rp/ale'                        " Async Lint Engine
+Plug 'w0rp/ale'                        " Linting and such
 
 " QoL
-Plug 'airblade/vim-gitgutter'          " Show git diffs in file
-Plug 'benmills/vimux'                  " Vim + Tmux
-Plug 'junegunn/vim-easy-align'         " align stuff
+Plug 'airblade/vim-gitgutter'          " Show git changes (+-~) in file
+Plug 'benmills/vimux'                  " Easily update tmux panes from vim
+Plug 'junegunn/vim-easy-align'         " Align stuff (like these comments)
 Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WISL
 Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
 
 " Filetype Specific
+"   Typescript
+Plug 'leafgarland/typescript-vim'      " Typescript syntax
+            \, { 'for': 'typescript' }
+
 "   Haskell
-Plug 'parsonsmatt/intero-neovim'       " Ghci, type-checking, etc
+Plug 'parsonsmatt/intero-neovim'       " OTF type-checking and more
             \, { 'for': 'haskell' }
-Plug 'neomake/neomake'                 " haskell syntax highlighting and indentation
+Plug 'neomake/neomake'                 " Really only for intero-neovim
             \, { 'for': 'haskell' }
 
 call plug#end()                        " required
 
-set number                             " Line nums in gutter
-set ruler                              " Show cursor pos in statusline
-set showmatch                          " Highlight matching brace
+filetype plugin indent on
+set number
+set ruler
+set showbreak=+++
+set textwidth=0
+set showmatch
 set visualbell
-set laststatus=2                       " Show statusbar in all panes
+set t_vb=
+set laststatus=2                                " Show statusbar in all panes
 set undolevels=1000
 set undofile
 set undodir=$HOME/.vim/vimundo/
-set hidden                             " Allow vim to hide modified buffers
-filetype plugin indent on
-
+set hidden                                      " Prevents from exiting w/o saving. (q!)
 set hlsearch
-set ignorecase
-set smartcase
-set incsearch                          " Highlight as you type your search
-
-" Whitespace
-set autoindent                         " Copy indent from current line when starting a new line
-set shiftwidth=4                       " Spaces for each indent
-set tabstop=4                          " Space:tab count when retabbing
-set softtabstop=4                      " Space:tab count when inserting/bsing
-set smartindent                        " Infer indentation on newlines
-set smarttab                           " Treat space chunks like tabs
-set expandtab                          " Spaces not tabs
-set backspace=indent,eol,start         " Backspace whenever
+set smartcase ignorecase
+set incsearch
+set autoindent
+set smarttab
+set expandtab
+set backspace=indent,eol,start
+set wrap linebreak nolist                       " softwrap
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
+                                                " Show whitepsace
 
-" Breaks
-set wrap                               " Softwrap long lines
-set linebreak                          " Try to wrap nicely
-set showbreak=+++
-set textwidth=0                        " Don't break lines on words
-
-" Misc
-set nrformats=                         " Ignores non-decimal number formats (courtesy of practical vim, pg 21
-
-" File name tab completion
-set wildmode=longest,list,full
+" wild/globbing
+set wildmode=list:longest,full
 set wildmenu
 set wildignorecase
 
-" Colors
-set bg=dark
+set nrformats=                                  " Ignores non-decimal number formats (hint courtesy of practical vim, pg 21
+map <C-l> <ESC>:tabn <CR>
+map <C-h> <ESC>:tabp <CR>
+map <C-j> <ESC>:bn! <CR>
+map <C-k> <ESC>:bp! <CR>
+map <C-_> <ESC>:b# <CR>
+
+set bg=light
 let g:airline_theme='sol'
+" colorscheme default
 syntax on
 
-" fzf through Git Files
+" FZF
 nnoremap <C-f> :GFiles<CR>
 autocmd! FileType fzf
 autocmd FileType fzf set laststatus=0 noshowmode noruler
@@ -87,16 +86,15 @@ autocmd FileType fzf set laststatus=0 noshowmode noruler
 "   Use :Fzfc to view changed git files
 command! Fzfc call fzf#run(fzf#wrap( {'source': 'git ls-files --exclude-standard --others --modified'}))
 
-" Move through tabs/buffers with grace
-nnoremap <C-l> <ESC>:tabn <CR>
-nnoremap <C-h> <ESC>:tabp <CR>
-nnoremap <C-j> <ESC>:bn! <CR>
-nnoremap <C-k> <ESC>:bp! <CR>
+" ALE
+map <Leader>] :ALENext<cr>
+map <Leader>[ :ALEPrevious<cr>
+
+" neomake
+map <Leader>] :lnext<cr>
+map <Leader>[ :lprev<cr>
+map <Leader>o :lopen<cr>
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" Don't forget about the ftplugins
-
