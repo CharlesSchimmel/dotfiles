@@ -4,3 +4,4 @@ iabbrev xmk ✗
 iabbrev xmkb ✘
 
 set textwidth=80
+set fo=jcroqlw
