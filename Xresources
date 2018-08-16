@@ -1,0 +1,43 @@
+Xcursor.theme: Neutral_Plus
+
+! URxvt--------------------------------------------------
+! URxvt*font:		xft:liberation mono:size=8
+! URxvt*font:		xft:noto mono:size=8
+! URxvt*font:		xft:hack:size=8
+/* URxvt*font:		xft:SourceCodePro-regular:size=8 */
+URxvt*font:		xft:SourceCodePro-regular:size=8
+! URxvt*font:		xft:Overpass Mono:size=8.5
+! URxvt*letterSpace: -1
+URxvt*scrollBar: false
+URxvt*termName: rxvt-unicode
+URxvt.borderless: true
+URxvt.buffered: false
+URxvt.perl-ext: default,url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+
+
+! xterm--------------------------------------------------
+xterm*borderWidth:	0
+xterm*scaleHeight: 0.85
+xterm*faceName: xft:SourceCodePro-regular:size=9
+! xterm*faceName: xft:SourceCodePro-regular:size=8.15
+! xterm*faceName: xft:Noto Mono:size=8.15
+
+! Xft settings ------------------------------------------
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.dpi: 96
+Xft.lcdfilter: lcddefault
+
+! Set theme
+#include ".Xresources.d/themes/softaschalk"
+
+! Include Color definitions
+#include ".Xresources.d/colors"
+
+! Include rofi
+#include ".Xresources.d/rofi"

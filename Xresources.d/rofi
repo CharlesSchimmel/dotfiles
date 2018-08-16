@@ -1,0 +1,22 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled:                  true
+rofi.color-normal:                   background,foreground,background,background,color6
+! rofi.color-urgent:                   background,#dc322f,#f5f5f5,color6,#dc322f
+! rofi.color-active:                   background,#c2cad0,#f5f5f5,color6,#c2cad0
+rofi.color-window:                   background,background
+! rofi.color-window:                   background,color12
+rofi.separator-style:                none
+rofi.opacity:                        100
+! rofi.font: hack 8
+rofi.font: Overpass Bold 9
+rofi.width: 15
+rofi.element_height: 100
+rofi.lines: 1
+rofi.sidebar-mode: false
+rofi.scrollbar-width: 0
+rofi.hidescrollbar: false
+
+rofi.fullscreen: false
+rofi.padding: 0
