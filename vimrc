@@ -19,6 +19,7 @@ Plug 'w0rp/ale'                        " Linting and such
 " QoL
 Plug 'airblade/vim-gitgutter'          " Show git changes (+-~) in file
 Plug 'benmills/vimux'                  " Easily update tmux panes from vim
+Plug 'christoomey/vim-tmux-navigator'  " Navigate vim/tmux panes
 Plug 'junegunn/vim-easy-align'         " Align stuff (like these comments)
 Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WISL
@@ -60,18 +61,18 @@ set backspace=indent,eol,start
 set wrap linebreak nolist                       " softwrap
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
                                                 " Show whitepsace
+set nrformats=                                  " Ignores non-decimal number formats (hint courtesy of practical vim, pg 21
 
 " wild/globbing
 set wildmode=list:longest,full
 set wildmenu
 set wildignorecase
 
-set nrformats=                                  " Ignores non-decimal number formats (hint courtesy of practical vim, pg 21
 map <C-l> <ESC>:tabn <CR>
 map <C-h> <ESC>:tabp <CR>
 map <C-j> <ESC>:bn! <CR>
 map <C-k> <ESC>:bp! <CR>
-map <C-_> <ESC>:b# <CR>
+map <C-p> <ESC>:b# <CR>
 
 set bg=light
 let g:airline_theme='sol'
@@ -98,3 +99,11 @@ map <Leader>o :lopen<cr>
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+" vim/tmux navigator bindings
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <A-p> :TmuxNavigatePrevious<cr>
