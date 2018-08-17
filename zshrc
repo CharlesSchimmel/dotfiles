@@ -12,11 +12,9 @@ SAVEHIST=5000
 setopt appendhistory autocd extendedglob nomatch notify share_history
 bindkey -v
 
-export GIT_PROMPT_EXECUTABLE="haskell"
-source $HOME/.zsh/zsh-git-prompt/zshrc.sh # for git prompt
 autoload -Uz promptinit && promptinit
 PROMPT='%F{blue}%%%f '
-RPROMPT='%~$(git_super_status)'
+RPROMPT='%~'
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -30,8 +28,6 @@ bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
 
-export PATH=$PATH":$HOME/.local/bin:$HOME/.npm-global/bin/"
+export PATH=$PATH":$HOME/.local/bin"
 export EDITOR='nvim'
 source "$HOME/.aliases"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

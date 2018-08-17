@@ -1,43 +1,3 @@
-call plug#begin('~/.vim/plugged')
-
-" The Pope's Holy Plugins
-Plug 'tpope/vim-commentary'            " use gcc to comment lines
-Plug 'tpope/vim-fugitive'              " git integration
-Plug 'tpope/vim-repeat'                " more advanced dot repetition
-Plug 'tpope/vim-sleuth'                " infers tab/space expansion from file
-Plug 'tpope/vim-surround'              " wrap stuff with ([{ etc
-Plug 'tpope/vim-vinegar'               " enhances netrw
-
-" Navigation/File Management
-Plug 'junegunn/fzf'                    " fuzzy file finder
-            \ , { 'dir':'~/.fzf', 'do':'./install --bin' }
-Plug 'junegunn/fzf.vim'                " fuzzy file finder
-
-" IDE ish
-Plug 'w0rp/ale'                        " Linting and such
-
-" QoL
-Plug 'airblade/vim-gitgutter'          " Show git changes (+-~) in file
-Plug 'benmills/vimux'                  " Easily update tmux panes from vim
-Plug 'christoomey/vim-tmux-navigator'  " Navigate vim/tmux panes
-Plug 'junegunn/vim-easy-align'         " Align stuff (like these comments)
-Plug 'vim-airline/vim-airline'         " Betterer statusline
-Plug 'vim-airline/vim-airline-themes'  " WISL
-Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
-
-" Filetype Specific
-"   Typescript
-Plug 'leafgarland/typescript-vim'      " Typescript syntax
-            \, { 'for': 'typescript' }
-
-"   Haskell
-Plug 'parsonsmatt/intero-neovim'       " OTF type-checking and more
-            \, { 'for': 'haskell' }
-Plug 'neomake/neomake'                 " Really only for intero-neovim
-            \, { 'for': 'haskell' }
-
-call plug#end()                        " required
-
 filetype plugin indent on
 set number
 set ruler
@@ -75,37 +35,7 @@ map <C-k> <ESC>:bp! <CR>
 map <C-p> <ESC>:b# <CR>
 
 set bg=light
-let g:airline_theme='sol'
 " colorscheme default
 syntax on
-
-" FZF
-nnoremap <C-f> :GFiles<CR>
-autocmd! FileType fzf
-autocmd FileType fzf set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-"   Use :Fzfc to view changed git files
-command! Fzfc call fzf#run(fzf#wrap( {'source': 'git ls-files --exclude-standard --others --modified'}))
-
-" ALE
-map <Leader>] :ALENext<cr>
-map <Leader>[ :ALEPrevious<cr>
-
-" neomake
-map <Leader>] :lnext<cr>
-map <Leader>[ :lprev<cr>
-map <Leader>o :lopen<cr>
-
-" EasyAlign
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-" vim/tmux navigator bindings
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <A-p> :TmuxNavigatePrevious<cr>
 
 set formatoptions=jcqorl
