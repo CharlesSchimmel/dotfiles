@@ -19,6 +19,7 @@ Plug 'w0rp/ale'                        " Async Lint Engine
 " QoL
 Plug 'airblade/vim-gitgutter'          " Show git diffs in file
 Plug 'benmills/vimux'                  " Vim + Tmux
+Plug 'christoomey/vim-tmux-navigator'  " Navigate vim/tmux panes
 Plug 'junegunn/vim-easy-align'         " align stuff
 Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WISL
@@ -60,6 +61,7 @@ set smarttab                           " Treat space chunks like tabs
 set expandtab                          " Spaces not tabs
 set backspace=indent,eol,start         " Backspace whenever
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
+set formatoptions=jcqorl
 
 " Breaks
 set wrap                               " Softwrap long lines
@@ -93,6 +95,8 @@ nnoremap <C-l> <ESC>:tabn <CR>
 nnoremap <C-h> <ESC>:tabp <CR>
 nnoremap <C-j> <ESC>:bn! <CR>
 nnoremap <C-k> <ESC>:bp! <CR>
+nnoremap <C-p> <ESC>:b# <CR>
+
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
@@ -101,3 +105,9 @@ nmap ga <Plug>(EasyAlign)
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Don't forget about the ftplugins
 
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <A-p> :TmuxNavigatePrevious<cr>
