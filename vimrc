@@ -26,9 +26,10 @@ Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
 
 " Filetype Specific
 "   Haskell
+Plug 'neovimhaskell/haskell-vim'       " haskell syntax highlighting and indentation
 Plug 'parsonsmatt/intero-neovim'       " Ghci, type-checking, etc
             \, { 'for': 'haskell' }
-Plug 'neomake/neomake'                 " haskell syntax highlighting and indentation
+Plug 'neomake/neomake'                 " lint/maker
             \, { 'for': 'haskell' }
 
 call plug#end()                        " required
