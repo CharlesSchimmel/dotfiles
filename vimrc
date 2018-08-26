@@ -62,6 +62,7 @@ set expandtab                          " Spaces not tabs
 set backspace=indent,eol,start         " Backspace whenever
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
 set formatoptions=jcqorl
+set shiftround                         " Round indent to nearest shiftwidth multiple
 
 " Breaks
 set wrap                               " Softwrap long lines
