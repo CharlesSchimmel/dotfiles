@@ -13,7 +13,7 @@ setopt appendhistory autocd extendedglob nomatch notify share_history
 bindkey -v
 
 autoload -Uz promptinit && promptinit
-PROMPT='%F{blue}%%%f '
+PROMPT='%F{blue}δ%f '
 RPROMPT='%~'
 
 autoload -U up-line-or-beginning-search
