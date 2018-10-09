@@ -29,7 +29,7 @@ bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
 
-export PATH=$PATH":$HOME/.local/bin"
+export PATH=$PATH":$HOME/.local/bin:$HOME/.npm-global/bin"
 export EDITOR='nvim'
 source $HOME/.aliases
 source /usr/share/zsh/plugins/clipboard.zsh 

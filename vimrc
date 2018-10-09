@@ -33,6 +33,10 @@ Plug 'parsonsmatt/intero-neovim'       " Ghci, type-checking, etc
 Plug 'neomake/neomake'                 " lint/maker
             \, { 'for': 'haskell' }
 
+" Typescript
+Plug 'leafgarland/typescript-vim' 
+            \, { 'for': 'typescript' }
+
 call plug#end()                        " required
 
 set number                             " Line nums in gutter
