@@ -43,6 +43,7 @@ xrandr --auto
 
 # Remap Caps to act as Ctrl when held, escape when tapped
 setxkbmap -option 'caps:ctrl_modifier'; xcape -e '#66=Escape'
+xcape -e 'Shift_R=BackSpace'
 
 # Space + hjkl = arrow keys. Sometimes dropsspaces when typing...
 # xmodmap -e "keycode 65 = Mode_switch"
@@ -66,8 +67,8 @@ setxkbmap -option 'caps:ctrl_modifier'; xcape -e '#66=Escape'
 # Finally use xcape to cause the return bar to generate a return when tapped.
 # xcape -e "$spare_mod=Return"
 
-# setxkbmap -layout dvorak
-# touch /tmp/q_to_d
+setxkbmap -layout dvorak
+touch /tmp/q_to_d
 exec i3
 # exec gnome-session
 # exec xfce4-session
