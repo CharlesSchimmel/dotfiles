@@ -9,7 +9,6 @@ Plug 'tpope/vim-surround'              " wrap stuff with ([{ etc
 Plug 'tpope/vim-vinegar'               " enhances netrw
 
 " Navigation/File Management
-Plug 'jremmen/vim-ripgrep'             " rg for vim
 Plug 'junegunn/fzf'                    " fuzzy file finder
 Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
@@ -104,15 +103,9 @@ nnoremap <C-h> <ESC>:tabp <CR>
 nnoremap <C-j> <ESC>:bn! <CR>
 nnoremap <C-k> <ESC>:bp! <CR>
 
-" nnoremap <C-p> <ESC>:b# <CR>
-
-
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" Don't forget about the ftplugins
 
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
@@ -121,53 +114,6 @@ nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <A-p> :TmuxNavigatePrevious<cr>
 
-augroup interoMaps
-  au!
-  " Maps for intero. Restrict to Haskell buffers so the bindings don't collide.
-
-  " Background process and window management
-  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
-
-  " Open intero/GHCi split horizontally
-  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-  " Open intero/GHCi split vertically
-  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
-  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-
-  " Reloading (pick one)
-  " Automatically reload on save
-  au BufWritePost *.hs InteroReload
-  " Manually save and reload
-  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
-
-  " Load individual modules
-  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-
-  " Type-related information
-  " Heads up! These next two differ from the rest.
-  au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
-  au FileType haskell map <silent> <leader>T <Plug>InteroType
-  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
-
-  " Navigation
-  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
-
-  " Managing targets
-  " Prompts you to enter targets (no silent):
-  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
-augroup END
-
-" Enable type information on hover (when holding cursor at point for ~1 second).
-let g:intero_type_on_hover = 1
-
-" Change the intero window size; default is 10.
-let g:intero_window_size = 80
-
-" Sets the intero window to split vertically; default is horizontal
-let g:intero_vertical_split = 1
-
-" OPTIONAL: Make the update time shorter, so the type info will trigger faster.
-set updatetime=1000
-let g:intero_prompt_regex = '^λ '
+" Mark markdown as valid filetype
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" Don't forget about the ftplugins
