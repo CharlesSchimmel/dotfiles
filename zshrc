@@ -29,8 +29,14 @@ bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
 
+function precmd () {
+  window_title="\033]0;${PWD##*/}\007"
+  echo -ne "$window_title"
+}
+
 export PATH=$PATH":$HOME/.local/bin:$HOME/.npm-global/bin"
 export EDITOR='nvim'
 source $HOME/.aliases
+source $HOME/.ghcup/env
 source /usr/share/zsh/plugins/clipboard.zsh 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting
