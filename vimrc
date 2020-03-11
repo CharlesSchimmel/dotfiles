@@ -14,6 +14,8 @@ Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
 " IDE ish
 Plug 'w0rp/ale'                        " Async Lint Engine
+Plug 'neoclide/coc.nvim'
+            \, {'do': { -> coc#util#install()}}
 
 " QoL
 Plug 'airblade/vim-gitgutter'          " Show git diffs in file
@@ -27,10 +29,7 @@ Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
 " Filetype Specific
 "   Haskell
 Plug 'neovimhaskell/haskell-vim'       " haskell syntax highlighting and indentation
-Plug 'parsonsmatt/intero-neovim'       " Ghci, type-checking, etc
-            \, { 'for': 'haskell' }
-Plug 'neomake/neomake'                 " lint/maker
-            \, { 'for': 'haskell' }
+Plug 'alx741/vim-hindent' " Optional
 
 " Typescript
 Plug 'leafgarland/typescript-vim' 
@@ -116,4 +115,8 @@ nnoremap <silent> <A-p> :TmuxNavigatePrevious<cr>
 
 " Mark markdown as valid filetype
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Source coc.nvim settings
+source $HOME/.vim/cocrc.vim
+
 " Don't forget about the ftplugins
