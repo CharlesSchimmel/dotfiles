@@ -69,7 +69,9 @@ xcape -e 'Shift_R=BackSpace'
 
 setxkbmap -layout dvorak
 touch /tmp/q_to_d
-exec i3
+exec $HOME/.cabal/bin/xmonad
+
+# exec i3
 # exec gnome-session
 # exec xfce4-session
 # exec bspwm
