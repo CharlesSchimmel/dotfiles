@@ -39,4 +39,5 @@ export EDITOR='nvim'
 source $HOME/.aliases
 source $HOME/.ghcup/env
 source /usr/share/zsh/plugins/clipboard.zsh 
+# if [ -e /home/elpfen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/elpfen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting

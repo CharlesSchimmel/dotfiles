@@ -1,3 +1,5 @@
+set nocompatible
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " The Pope's Holy Plugins
@@ -13,9 +15,10 @@ Plug 'junegunn/fzf'                    " fuzzy file finder
 Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
 " IDE ish
-Plug 'w0rp/ale'                        " Async Lint Engine
-Plug 'neoclide/coc.nvim'
-            \, {'do': { -> coc#util#install()}}
+" Plug 'w0rp/ale'                        " Async Lint Engine
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vimwiki/vimwiki'
+Plug 'sheerun/vim-polyglot'
 
 " QoL
 Plug 'airblade/vim-gitgutter'          " Show git diffs in file
@@ -28,8 +31,7 @@ Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
 
 " Filetype Specific
 "   Haskell
-Plug 'neovimhaskell/haskell-vim'       " haskell syntax highlighting and indentation
-Plug 'alx741/vim-hindent' " Optional
+" Plug 'neovimhaskell/haskell-vim'       " haskell syntax highlighting and indentation (provided in polyglot)
 
 " Typescript
 Plug 'leafgarland/typescript-vim' 
@@ -37,6 +39,13 @@ Plug 'leafgarland/typescript-vim'
 
 " Elm
 Plug 'elmcast/elm-vim'
+
+" Tidal
+Plug 'davidgranstrom/scnvim', { 'do': {-> scnvim#install() } }
+Plug 'tidalcycles/vim-tidal'
+
+" Candy
+Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()                        " required
 
@@ -49,7 +58,9 @@ set undolevels=1000
 set undofile
 set undodir=$HOME/.vim/vimundo/
 set hidden                             " Allow vim to hide modified buffers
+
 filetype plugin indent on
+syntax on
 
 set hlsearch
 set ignorecase
@@ -83,18 +94,31 @@ set wildmode=longest,list,full
 set wildmenu
 set wildignorecase
 
+noremap <leader>gf :e <cfile><cr>
+
 " Colors
+set termguicolors
+colorscheme tokyonight
+let g:airline_theme = "tokyonight"
+let g:tokyonight_style = 'storm'
+let g:tokyonight_enable_italic = 1
 set bg=dark
-let g:airline_theme='sol'
-syntax on
 
 " fzf through Git Files
 nnoremap <C-p> :GFiles<CR>
+nnoremap <C-y> :Files<CR>
+nnoremap <C-g> :Rg<CR>
+nnoremap <C-b> :Buffers<CR>
+imap <c-x><c-f> <plug>(fzf-complete-path)
 autocmd! FileType fzf
 autocmd FileType fzf set laststatus=0 noshowmode noruler
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 "   Use :Fzfc to view changed git files
 command! Fzfc call fzf#run(fzf#wrap( {'source': 'git ls-files --exclude-standard --others --modified'}))
+function! HandleFZF(file)
+    echo a:file
+endfunction
+command! -nargs=1 HandleFZF :call HandleFZF(<f-args>)
 
 " Move through tabs/buffers with grace
 nnoremap <C-l> <ESC>:tabn <CR>
@@ -120,3 +144,13 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 source $HOME/.vim/cocrc.vim
 
 " Don't forget about the ftplugins
+
+let g:vimwiki_list = [
+    \ {'path': '~/zk', 'syntax': 'markdown', 'ext': 'md'},
+    \ {'path': '~/infinite-jest/', 'syntax': 'markdown', 'ext': '.md'}, 
+    \ {'path': '~/dox/sync-notes/', 'syntax': 'markdown', 'ext': 'md'}]
+" By default vimwiki will intereprate all .md files as vimwiki
+let g:vimwiki_global_ext = 0
+let g:vimwiki_auto_header = 1
+
+
