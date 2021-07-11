@@ -37,176 +37,84 @@ Plug 'sainnhe/sonokai'
 Plug 'joshdick/onedark.vim'
 Plug 'ghifarit53/tokyonight-vim'
 
-call plug#end()                        " required
+call plug#end()                  " required
 
-set autoindent
-set backspace=indent,eol,start
-set expandtab
-set formatoptions=jcqorl
-set hidden                                      " Prevents from exiting w/o saving. (q!)
-set hlsearch
-set incsearch
-set laststatus=2                                " Always show statusbar
+set autoindent                   " Copy indent from current line when starting a new line
+set backspace=indent,eol,start   " Backspace whenever
+set expandtab                    " Spaces not tabs
+set formatoptions=jcqorl         " Set formatting default
+set hidden                       " Allow vim to hide modified buffers
+set hlsearch                     " Highlight search results
+set ignorecase                   " Disregard case when searching
+set incsearch                    " Highlight as you type your search
+set laststatus=2                 " Show statusbar in all panes
+set linebreak                    " Try to wrap nicely
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
-set nocompatible
-set nrformats=                                  " Ignores non-decimal number formats (hint courtesy of practical vim, pg 21
-set number
-set ruler
-set shiftround
-set showbreak=+++
-set showmatch
-set smartcase ignorecase
-set smartindent
-set smarttab
-set t_vb=
-set textwidth=0
-set undodir=$HOME/.vim/vimundo/
-set undofile
+set nrformats=                   " Ignores non-decimal number formats (courtesy of practical vim, pg 21
+set number                       " Line nums in gutter
+set ruler                        " Show cursor pos in statusline
+set shiftround                   " Round indent to nearest shiftwidth multiple
+set shiftwidth=4                 " Spaces for each indent
+set showbreak=+++                " When softwrapping prepend wrapped lines with +++
+set showmatch                    " Highlight matching brace
+set smartcase                    " Case-sensitive if search contains Upper
+set smartindent                  " Infer indentation on newlines
+set smarttab                     " Treat space chunks like tabs
+set softtabstop=4                " Space:tab count when inserting/bsing
+set tabstop=4                    " Space:tab count when retabbing
+set textwidth=0                  " Don't break lines on words
+set undodir=$HOME/.vim/vimundo/  " Store undo files here
+set undofile                     " Persist undo across sessions
 set undolevels=1000
-set visualbell
-set wrap linebreak nolist                       " softwrap
+set visualbell                   " Flash terminal on bell
+set wildignorecase
+set wildmenu
+set wildmode=longest,list,full
+set wrap                         " Softwrap long lines
 
 filetype plugin indent on
 syntax on
+
+" === Colors ===
 set bg=dark
-highlight Search ctermbg=grey
-set t_Co=256
-
-" let g:sonokai_style = 'atlantis'
-" let g:sonokai_enable_italic = 1
-" let g:sonokai_disable_italic_comment = 1
 set termguicolors
+set t_vb=                        " disable visual bell
+set t_Co=256                     " Still necessary?
 
+colorscheme tokyonight
 let g:tokyonight_style = 'storm' " available: night, storm
 let g:tokyonight_enable_italic = 1
 
-colorscheme tokyonight
+" === Bindings ===
+" create file under cursor if it does not exist
+noremap <leader>gf :e <cfile><cr>
 
-" wild/globbing
-set wildmode=list:longest,full
-set wildmenu
-set wildignorecase
-
-" FZF
-nnoremap <C-p> :GFiles<CR>
-nnoremap <C-y> :Files<CR>
-nnoremap <C-g> :Rg<CR>
-nnoremap <C-b> :Buffers<CR>
-inoremap <expr> <c-x><c-g> fzf#vim#complete#path('rg')
-imap <c-x><c-f> <plug>(fzf-complete-path)
-" imap <c-x><c-l> <plug>(fzf-complete-line)
-autocmd! FileType fzf
-autocmd FileType fzf set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-"   Use :Fzfc to view changed git files
-command! Fzfc call fzf#run(fzf#wrap( {'source': 'git ls-files --exclude-standard --others --modified'}))
-" inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
-" Complete file path relative to current buffer
-inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
-    \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
-    \ fzf#wrap({'dir': expand('%:p:h')}))
-
-" ALE
-map <Leader>] :ALENext<cr>
-map <Leader>[ :ALEPrevious<cr>
-highlight ALEError cterm=underline
-highlight ALEWarning cterm=underline
-
-" EasyAlign
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-" let g:airline_theme='onedark'
-let g:airline_theme = "tokyonight"
-let g:airline#extensions#coc#enabled = 1
-let g:airline_mode_map = {
-        \ '__':    '-',
-        \ 'c':     'C',
-        \ 'i':     'I',
-        \ 'ic':    'I',
-        \ 'ix':    'I',
-        \ 'multi': 'M',
-        \ 'n':     'N',
-        \ 'ni':    '(I)',
-        \ 'no':    'OP PENDING',
-        \ 'R':     'R',
-        \ 'Rv':    'VR',
-        \ 's':     'S',
-        \ 'S':     'SL',
-        \ '':    'SB',
-        \ 't':     'T',
-        \ 'v':     'V',
-        \ 'V':     'V',
-        \ '':      'VB',
-        \ }
-
-
-" store swapfiles in one place instead of litterring them all over
-set directory=$HOME/.vim/swapfiles//
-
-" close netrw buffers
-autocmd FileType netrw setl bufhidden=wipe
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <leader>di <Plug>(coc-diagnostic-info)
-nmap <silent> <leader>dn <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>dp <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>cr <Plug>(coc-rename)
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-"
-" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-set updatetime=300
-set signcolumn=yes
-" === END coc.nvim === "
-
-" === Custom Bindings === "
+" Move through tabs/buffers with grace
 map <C-l> <ESC>:tabn <CR>
 map <C-h> <ESC>:tabp <CR>
 map <C-j> <ESC>:bn! <CR>
 map <C-k> <ESC>:bp! <CR>
-" map <C-p> <ESC>:b# <CR>
-
-" Move between panes
-let g:tmux_navigator_no_mappings = 1
-nnoremap <A-h> :TmuxNavigateLeft<CR>
-nnoremap <A-j> :TmuxNavigateDown<CR>
-nnoremap <A-k> :TmuxNavigateUp<CR>
-nnoremap <A-l> :TmuxNavigateRight<CR>
-nnoremap <A-p> :TmuxNavigatePrevious<CR>
 
 if &diff
     nmap <leader>gr :diffg REMOTE<cr>
     nmap <leader>gl :diffg LOCAL<cr>
 endif
-let g:coc_node_path="/home/schimmch/.nvm/versions/node/v10.16.3/bin/node"
 
-" VimWiki
-let g:vimwiki_auto_header = 1
-" to replace spaces with underscores: 'links_space_char': '_'
-let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
-" By default VimWiki will interprate all .md files as VimWiki files. This disables that.
-let g:vimwiki_global_ext = 0 
-" Always append .md extension when creating new items or filling existing items
-" let g:vimwiki_markdown_link_ext = 1
+" === Plugin Settings ===
+" close netrw buffers
+autocmd FileType netrw setl bufhidden=wipe
+
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+source $HOME/.vim/plugin-settings/vimwiki.vim
+source $HOME/.vim/plugin-settings/tmux-navigator.vim
+source $HOME/.vim/plugin-settings/coc.vim
+source $HOME/.vim/plugin-settings/airline.vim
+source $HOME/.vim/plugin-settings/fzf.vim
+
+" removed 20210711
+" set nolist                                      " ???
+" highlight Search ctermbg=grey
+" set directory=$HOME/.vim/swapfiles//
