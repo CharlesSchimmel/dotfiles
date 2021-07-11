@@ -1,13 +1,12 @@
-iabbrev cmk ✓
-iabbrev cmkb ✔
-iabbrev xmk ✗
-iabbrev xmkb ✘
+set colorcolumn=80
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set textwidth=80
 
 syn match MdTodoOpen /* \[ \]/ conceal cchar=o
 syn match MdTodoClose /* \[x\]/ conceal cchar=✔
 hi clear Conceal
 
-set textwidth=80
-set formatoptions=jcqorltwan
-set shiftwidth=2
-set tabstop=2
+set formatoptions=tcroqwanlj
+set comments=fb:*,fb:-,fb:+,fb:1.,n:> 
