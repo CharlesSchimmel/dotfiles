@@ -78,7 +78,6 @@ set bg=dark
 set termguicolors
 
 colorscheme tokyonight
-let g:airline_theme = "tokyonight"
 let g:tokyonight_style = 'storm'
 
 " === Bindings ===
