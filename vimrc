@@ -16,26 +16,25 @@ Plug 'junegunn/fzf'                    " fuzzy file finder
 Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
 " IDE ish
-" Plug 'w0rp/ale'                        " Async Link Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
+Plug 'vimwiki/vimwiki'
 
 " QoL
 Plug 'airblade/vim-gitgutter'          " Show git changes (+-~) in file
-Plug 'junegunn/vim-easy-align'         " Align stuff (like these comments)
 Plug 'christoomey/vim-tmux-navigator'  " Navigate vim/tmux panes
+Plug 'junegunn/goyo.vim'               " Center the text area
+Plug 'junegunn/vim-easy-align'         " Align stuff (like these comments)
 Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WISL
 Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
-Plug 'junegunn/goyo.vim'               " Center the text area
 
 " Candy
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'joshdick/onedark.vim'
 Plug 'romainl/apprentice'
 Plug 'sainnhe/sonokai'
-Plug 'joshdick/onedark.vim'
-Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()                  " required
 
