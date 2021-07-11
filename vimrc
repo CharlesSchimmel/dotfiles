@@ -1,4 +1,4 @@
-set nocompatible
+set nocompatible " must be first
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -36,7 +36,7 @@ Plug 'tidalcycles/vim-tidal'
 " Candy
 Plug 'ghifarit53/tokyonight-vim'
 
-call plug#end()                        " required
+call plug#end()                 " required
 
 set autoindent                  " Copy indent from current line when starting a new line
 set backspace=indent,eol,start  " Backspace whenever
@@ -54,7 +54,7 @@ set number                      " Line nums in gutter
 set ruler                       " Show cursor pos in statusline
 set shiftround                  " Round indent to nearest shiftwidth multiple
 set shiftwidth=4                " Spaces for each indent
-set showbreak=+++
+set showbreak=+++               " When softwrapping prepend wrapped lines with +++
 set showmatch                   " Highlight matching brace
 set smartcase                   " Case-sensitive if search contains Upper
 set smartindent                 " Infer indentation on newlines
@@ -74,14 +74,16 @@ set wrap                        " Softwrap long lines
 filetype plugin indent on
 syntax on
 
-" Colors
+" === Colors ===
 set bg=dark
 set termguicolors
+
 colorscheme tokyonight
 let g:airline_theme = "tokyonight"
 let g:tokyonight_style = 'storm'
 
-" try to go to line under cursor
+" === Bindings ===
+" create file under cursor if it does not exist
 noremap <leader>gf :e <cfile><cr>
 
 " Move through tabs/buffers with grace
@@ -90,10 +92,15 @@ nnoremap <C-h> <ESC>:tabp <CR>
 nnoremap <C-j> <ESC>:bn! <CR>
 nnoremap <C-k> <ESC>:bp! <CR>
 
-" Mark markdown as valid filetype
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+if &diff
+    nmap <leader>gr :diffg REMOTE<cr>
+    nmap <leader>gl :diffg LOCAL<cr>
+endif
 
 " === Plugin Settings ===
+" close netrw buffers
+autocmd FileType netrw setl bufhidden=wipe
+
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
