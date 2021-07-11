@@ -38,7 +38,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()                        " required
-                                                " Show whitepsace
+
 set autoindent
 set backspace=indent,eol,start
 set expandtab
@@ -188,23 +188,8 @@ map <C-j> <ESC>:bn! <CR>
 map <C-k> <ESC>:bp! <CR>
 " map <C-p> <ESC>:b# <CR>
 
-" Move to beginning / end of line easier
-nnoremap H ^
-nnoremap L $
-vnoremap H ^
-vnoremap L g
-
-noremap gl L
-noremap gh H
-noremap gm M
-
 " Move between panes
 let g:tmux_navigator_no_mappings = 1
-" nnoremap h :TmuxNavigateLeft<CR>
-" nnoremap j :TmuxNavigateDown<CR>
-" nnoremap k :TmuxNavigateUp<CR>
-" nnoremap l :TmuxNavigateRight<CR>
-" nnoremap p :TmuxNavigatePrevious<CR>
 nnoremap <A-h> :TmuxNavigateLeft<CR>
 nnoremap <A-j> :TmuxNavigateDown<CR>
 nnoremap <A-k> :TmuxNavigateUp<CR>
