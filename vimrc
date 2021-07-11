@@ -15,7 +15,6 @@ Plug 'junegunn/fzf'                    " fuzzy file finder
 Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
 " IDE ish
-" Plug 'w0rp/ale'                        " Async Lint Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
