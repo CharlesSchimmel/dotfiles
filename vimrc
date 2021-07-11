@@ -86,13 +86,13 @@ let g:tokyonight_enable_italic = 1
 
 " === Bindings ===
 " create file under cursor if it does not exist
-noremap <leader>gf :e <cfile><cr>
+nnoremap <leader>gf :e <cfile><cr>
 
 " Move through tabs/buffers with grace
-map <C-l> <ESC>:tabn <CR>
-map <C-h> <ESC>:tabp <CR>
-map <C-j> <ESC>:bn! <CR>
-map <C-k> <ESC>:bp! <CR>
+nnoremap <C-l> <ESC>:tabn <CR>
+nnoremap <C-h> <ESC>:tabp <CR>
+nnoremap <C-j> <ESC>:bn! <CR>
+nnoremap <C-k> <ESC>:bp! <CR>
 
 if &diff
     nmap <leader>gr :diffg REMOTE<cr>
