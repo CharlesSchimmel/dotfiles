@@ -151,6 +151,18 @@ let g:vimwiki_list = [
     \ {'path': '~/dox/sync-notes/', 'syntax': 'markdown', 'ext': 'md'}]
 " By default vimwiki will intereprate all .md files as vimwiki
 let g:vimwiki_global_ext = 0
-let g:vimwiki_auto_header = 1
+" let g:vimwiki_auto_header = 1 " H1 with the file name on new file
 
-
+au BufNewFile ~/zk/*.md 0r !~/zk/template.sh '%'
+au BufNewFile ~/zk/*.md ks|:normal ggzf4j|'s
+" from the helpfiles 'skeleton template'
+autocmd BufWritePre,FileWritePre *.md   ks|call LastMod()|'s
+fun LastMod()
+  if line("$") > 10
+    let l = 10
+  else
+    let l = line("$")
+  endif
+  exe "1," . l . "g/updated: /s/updated: .*/updated: " .
+  \ strftime("%Y-%m-%d")
+endfun
