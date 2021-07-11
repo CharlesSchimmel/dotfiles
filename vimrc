@@ -4,7 +4,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " The Pope's Holy Plugins
 Plug 'tpope/vim-commentary'            " use gcc to comment lines
-Plug 'tpope/vim-fugitive'              " enhances netrw
+Plug 'tpope/vim-fugitive'              " git stuff
 Plug 'tpope/vim-repeat'                " more advanced dot repetition
 Plug 'tpope/vim-sleuth'                " infers tab/space expansion from file
 Plug 'tpope/vim-surround'              " wrap stuff with ([{ etc
@@ -28,9 +28,6 @@ Plug 'junegunn/vim-easy-align'         " align stuff
 Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WIS
 Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
-
-" Elm
-Plug 'elmcast/elm-vim'
 
 " Tidal
 Plug 'davidgranstrom/scnvim', { 'do': {-> scnvim#install() } }
@@ -77,16 +74,15 @@ set wrap                        " Softwrap long lines
 filetype plugin indent on
 syntax on
 
-" try to go to line under cursor
-noremap <leader>gf :e <cfile><cr>
-
 " Colors
+set bg=dark
 set termguicolors
 colorscheme tokyonight
 let g:airline_theme = "tokyonight"
 let g:tokyonight_style = 'storm'
-let g:tokyonight_enable_italic = 1
-set bg=dark
+
+" try to go to line under cursor
+noremap <leader>gf :e <cfile><cr>
 
 " Move through tabs/buffers with grace
 nnoremap <C-l> <ESC>:tabn <CR>
@@ -94,18 +90,15 @@ nnoremap <C-h> <ESC>:tabp <CR>
 nnoremap <C-j> <ESC>:bn! <CR>
 nnoremap <C-k> <ESC>:bp! <CR>
 
+" Mark markdown as valid filetype
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Plugin Settings
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" Mark markdown as valid filetype
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-" Specific Settings
 source $HOME/.vim/plugin-settings/coc.vim
 source $HOME/.vim/plugin-settings/vimwiki.vim
 source $HOME/.vim/plugin-settings/fzf.vim
 source $HOME/.vim/plugin-settings/tmux-navigator.vim
-
-" Don't forget about the ftplugins
-
