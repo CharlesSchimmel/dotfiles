@@ -1,3 +1,4 @@
+hi CocFloating ctermbg=black
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -121,6 +122,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+nnoremap <leader>d :CocList diagnostics<cr>
 " Mappings using CoCList:
 " Show all diagnostics.
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
