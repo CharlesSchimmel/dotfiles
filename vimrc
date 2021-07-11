@@ -93,7 +93,7 @@ nnoremap <C-k> <ESC>:bp! <CR>
 " Mark markdown as valid filetype
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" Plugin Settings
+" === Plugin Settings ===
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
