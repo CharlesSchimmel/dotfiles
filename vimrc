@@ -16,7 +16,8 @@ Plug 'junegunn/fzf'                    " fuzzy file finder
 Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
 " IDE ish
-Plug 'w0rp/ale'                        " Linting and such
+" Plug 'w0rp/ale'                        " Async Link Engine
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
 
@@ -27,15 +28,7 @@ Plug 'christoomey/vim-tmux-navigator'  " Navigate vim/tmux panes
 Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WISL
 Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
-Plug 'neoclide/coc.nvim'               " Intellisense engine for nvim
-     \, {'branch': 'release'}
 Plug 'junegunn/goyo.vim'               " Center the text area
-
-" Filetype Specific
-"   Typescript
-Plug 'leafgarland/typescript-vim'      " Typescript syntax
-"   Dhall
-Plug 'vmchale/dhall-vim'
 
 " Candy
 Plug 'drewtempelmeyer/palenight.vim'
@@ -45,36 +38,35 @@ Plug 'joshdick/onedark.vim'
 Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()                        " required
-
+                                                " Show whitepsace
+set autoindent
+set backspace=indent,eol,start
+set expandtab
 set formatoptions=jcqorl
-set nocompatible
-filetype plugin indent on
-set number
-set ruler
-set showbreak=+++
-set textwidth=0
-set showmatch
-set visualbell
-set t_vb=
-set laststatus=2                                " Always show statusbar
-set undolevels=1000
-set undofile
-set undodir=$HOME/.vim/vimundo/
 set hidden                                      " Prevents from exiting w/o saving. (q!)
 set hlsearch
-set smartcase ignorecase
 set incsearch
-set autoindent
+set laststatus=2                                " Always show statusbar
+set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
+set nocompatible
+set nrformats=                                  " Ignores non-decimal number formats (hint courtesy of practical vim, pg 21
+set number
+set ruler
+set shiftround
+set showbreak=+++
+set showmatch
+set smartcase ignorecase
 set smartindent
 set smarttab
-set expandtab
-set backspace=indent,eol,start
+set t_vb=
+set textwidth=0
+set undodir=$HOME/.vim/vimundo/
+set undofile
+set undolevels=1000
+set visualbell
 set wrap linebreak nolist                       " softwrap
-set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
-                                                " Show whitepsace
-set shiftround
-set nrformats=                                  " Ignores non-decimal number formats (hint courtesy of practical vim, pg 21
 
+filetype plugin indent on
 syntax on
 set bg=dark
 highlight Search ctermbg=grey
