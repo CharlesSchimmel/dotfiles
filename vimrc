@@ -29,14 +29,6 @@ Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WISL
 Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
 
-" Filetype Specific
-"   Haskell
-" Plug 'neovimhaskell/haskell-vim'       " haskell syntax highlighting and indentation (provided in polyglot)
-
-" Typescript
-Plug 'leafgarland/typescript-vim' 
-            \, { 'for': 'typescript' }
-
 " Elm
 Plug 'elmcast/elm-vim'
 
@@ -49,51 +41,43 @@ Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()                        " required
 
-set number                             " Line nums in gutter
-set ruler                              " Show cursor pos in statusline
-set showmatch                          " Highlight matching brace
-set visualbell
-set laststatus=2                       " Show statusbar in all panes
+set autoindent                  " Copy indent from current line when starting a new line
+set backspace=indent,eol,start  " Backspace whenever
+set expandtab                   " Spaces not tabs
+set formatoptions=jcqorl        " Set formatting default
+set hidden                      " Allow vim to hide modified buffers
+set hlsearch                    " Highlight search results
+set ignorecase                  " Disregard case when searching
+set incsearch                   " Highlight as you type your search
+set laststatus=2                " Show statusbar in all panes
+set linebreak                   " Try to wrap nicely
+set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
+set nrformats=                  " Ignores non-decimal number formats (courtesy of practical vim, pg 21
+set number                      " Line nums in gutter
+set ruler                       " Show cursor pos in statusline
+set shiftround                  " Round indent to nearest shiftwidth multiple
+set shiftwidth=4                " Spaces for each indent
+set showbreak=+++
+set showmatch                   " Highlight matching brace
+set smartcase                   " Case-sensitive if search contains Upper
+set smartindent                 " Infer indentation on newlines
+set smarttab                    " Treat space chunks like tabs
+set softtabstop=4               " Space:tab count when inserting/bsing
+set tabstop=4                   " Space:tab count when retabbing
+set textwidth=0                 " Don't break lines on words
+set undodir=$HOME/.vim/vimundo/ " Store undo files here
+set undofile                    " Persist undo across sessions
 set undolevels=1000
-set undofile
-set undodir=$HOME/.vim/vimundo/
-set hidden                             " Allow vim to hide modified buffers
+set visualbell                  " Flash terminal on bell
+set wildignorecase
+set wildmenu
+set wildmode=longest,list,full
+set wrap                        " Softwrap long lines
 
 filetype plugin indent on
 syntax on
 
-set hlsearch
-set ignorecase
-set smartcase
-set incsearch                          " Highlight as you type your search
-
-" Whitespace
-set autoindent                         " Copy indent from current line when starting a new line
-set shiftwidth=4                       " Spaces for each indent
-set tabstop=4                          " Space:tab count when retabbing
-set softtabstop=4                      " Space:tab count when inserting/bsing
-set smartindent                        " Infer indentation on newlines
-set smarttab                           " Treat space chunks like tabs
-set expandtab                          " Spaces not tabs
-set backspace=indent,eol,start         " Backspace whenever
-set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
-set formatoptions=jcqorl
-set shiftround                         " Round indent to nearest shiftwidth multiple
-
-" Breaks
-set wrap                               " Softwrap long lines
-set linebreak                          " Try to wrap nicely
-set showbreak=+++
-set textwidth=0                        " Don't break lines on words
-
-" Misc
-set nrformats=                         " Ignores non-decimal number formats (courtesy of practical vim, pg 21
-
-" File name tab completion
-set wildmode=longest,list,full
-set wildmenu
-set wildignorecase
-
+" try to go to line under cursor
 noremap <leader>gf :e <cfile><cr>
 
 " Colors
@@ -143,8 +127,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Source coc.nvim settings
 source $HOME/.vim/cocrc.vim
 
-" Don't forget about the ftplugins
-
 let g:vimwiki_list = [
     \ {'path': '~/zk', 'syntax': 'markdown', 'ext': 'md'},
     \ {'path': '~/infinite-jest/', 'syntax': 'markdown', 'ext': '.md'}, 
@@ -166,3 +148,6 @@ fun LastMod()
   exe "1," . l . "g/updated: /s/updated: .*/updated: " .
   \ strftime("%Y-%m-%d")
 endfun
+
+" Don't forget about the ftplugins
+
