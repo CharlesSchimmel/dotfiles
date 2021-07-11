@@ -83,7 +83,7 @@ let g:tokyonight_style = 'storm'
 
 " === Bindings ===
 " create file under cursor if it does not exist
-noremap <leader>gf :e <cfile><cr>
+nnoremap <leader>gf :e <cfile><cr>
 
 " Move through tabs/buffers with grace
 nnoremap <C-l> <ESC>:tabn <CR>
