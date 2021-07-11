@@ -1,22 +1,12 @@
-iabbrev lchk ✓
-iabbrev chk ✔
-iabbrev cmk ✔
-iabbrev lxmk ✗
-iabbrev xmk ✘
-iabbrev upr ↑
-iabbrev downr ↓
-iabbrev rightr →
-iabbrev leftr ←
-iabbrev subsetsym ⊆
-iabbrev supersetsym ⊇
-iabbrev elem ∈
-iabbrev nelem ∉
-iabbrev union ∪
-
 set colorcolumn=80
-set textwidth=80
-set shiftwidth=2
 set expandtab
+set shiftwidth=2
+set tabstop=2
+set textwidth=80
+
+syn match MdTodoOpen /* \[ \]/ conceal cchar=o
+syn match MdTodoClose /* \[x\]/ conceal cchar=✔
+hi clear Conceal
 
 " j: Where it makes sense, remove a comment leader when joining lines
 " a: Automatic formatting of paragraphs. Every time text is inserted or deleted 
