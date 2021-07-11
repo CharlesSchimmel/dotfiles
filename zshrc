@@ -7,37 +7,44 @@ zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit && compinit
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=5000
+SAVEHIST=5000
 setopt appendhistory autocd extendedglob nomatch notify share_history
 bindkey -v
+set -o ignoreeof # Do not exit shell when <C-d> pressed
 
-export GIT_PROMPT_EXECUTABLE="haskell"
-source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+# source $HOME/.zsh/zsh-git-prompt/zshrc.sh # for git prompt
 autoload -Uz promptinit && promptinit
-PROMPT='%F{cyan}%%%f '
-RPROMPT='%~$(git_super_status)'
+PROMPT='%F{blue}%%%f '
+# RPROMPT='%~$(git_super_status)'
+RPROMPT='%~'
 
-autoload -U up-line-or-beginning-search down-line-or-beginning-search
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey '\eOc' forward-word # <C-{left,right}>
 bindkey '\eOd' backward-word
-bindkey '[A' up-line-or-beginning-search # up and down - for completing past commands
-bindkey '[B' down-line-or-beginning-search
+bindkey 'OA' up-line-or-beginning-search # up and down - for completing past commands
+bindkey 'OB' down-line-or-beginning-search
 bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
 
-function precmd () {
-  window_title="\033]0;${PWD##*/}\007"
-  echo -ne "$window_title"
-}
-
-export PATH=$PATH":$HOME/.local/bin:$HOME/.npm-global/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.nvm/versions/node/v10.16.3/bin/"
 export EDITOR='nvim'
-source $HOME/.aliases
-source $HOME/.ghcup/env
-source /usr/share/zsh/plugins/clipboard.zsh 
-# if [ -e /home/elpfen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/elpfen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting
+source "$HOME/.aliases"
+source "$HOME/.projects.sh"
+
+eval $(dircolors -b $HOME/.ls_colors/LS_COLORS)
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ -z "$TMUX" ]; then
+    tmux -2 attach || exec tmux -2 new-session
+fi
+cd $HOME

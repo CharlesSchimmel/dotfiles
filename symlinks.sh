@@ -1,12 +1,10 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-ln -s $HOME/dots/aliases $HOME/.aliases
-ln -s $HOME/dots/inputrc $HOME/.inputrc
-ln -s $HOME/dots/vimrc $HOME/.vimrc
-if [[ -e $HOME/.vim ]]; then
-    ln -s $HOME/dots/vim/ftplugin $HOME/.vim/ftplugin
-fi
-ln -s $HOME/dots/xinitrc $HOME/.xinitrc
-ln -s $HOME/dots/Xresources $HOME/.Xresources
-ln -s $HOME/dots/Xresources.d $HOME/.Xresources.d
-ln -s $HOME/dots/zshrc $HOME/.zshrc
+ln -s $PWD/aliases $HOME/.aliases
+ln -s $PWD/inputrc $HOME/.inputrc
+ln -s $PWD/vimrc $HOME/.vimrc
+ln -s $PWD/vim/ftplugin $HOME/.vim/ftplugin
+ln -s $PWD/zshrc $HOME/.zshrc
+ln -s $PWD/tmux.conf $HOME/.tmux.conf
+ln -s $PWD/scripts $HOME/.scripts
+ln -s $PWD/config/nvim/init.vim $HOME/config/nvim/init.vim

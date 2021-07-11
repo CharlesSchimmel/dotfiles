@@ -1,10 +1,10 @@
-set nocompatible
+set nocompatible " must be first
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 " The Pope's Holy Plugins
 Plug 'tpope/vim-commentary'            " use gcc to comment lines
-Plug 'tpope/vim-fugitive'              " enhances netrw
+Plug 'tpope/vim-fugitive'              " git integration
 Plug 'tpope/vim-repeat'                " more advanced dot repetition
 Plug 'tpope/vim-sleuth'                " infers tab/space expansion from file
 Plug 'tpope/vim-surround'              " wrap stuff with ([{ etc
@@ -12,145 +12,224 @@ Plug 'tpope/vim-vinegar'               " enhances netrw
 
 " Navigation/File Management
 Plug 'junegunn/fzf'                    " fuzzy file finder
+            \ , { 'dir':'~/.fzf', 'do':'./install --bin' }
 Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
 " IDE ish
-" Plug 'w0rp/ale'                        " Async Lint Engine
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'w0rp/ale'                        " Linting and such
 Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
 
 " QoL
-Plug 'airblade/vim-gitgutter'          " Show git diffs in file
-Plug 'benmills/vimux'                  " Vim + Tmux
+Plug 'airblade/vim-gitgutter'          " Show git changes (+-~) in file
+Plug 'junegunn/vim-easy-align'         " Align stuff (like these comments)
 Plug 'christoomey/vim-tmux-navigator'  " Navigate vim/tmux panes
-Plug 'junegunn/vim-easy-align'         " align stuff
 Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WISL
 Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
+Plug 'neoclide/coc.nvim'               " Intellisense engine for nvim
+     \, {'branch': 'release'}
+Plug 'junegunn/goyo.vim'               " Center the text area
 
 " Filetype Specific
-"   Haskell
-" Plug 'neovimhaskell/haskell-vim'       " haskell syntax highlighting and indentation (provided in polyglot)
-
-" Typescript
-Plug 'leafgarland/typescript-vim' 
-            \, { 'for': 'typescript' }
-
-" Elm
-Plug 'elmcast/elm-vim'
-
-" Tidal
-Plug 'davidgranstrom/scnvim', { 'do': {-> scnvim#install() } }
-Plug 'tidalcycles/vim-tidal'
+"   Typescript
+Plug 'leafgarland/typescript-vim'      " Typescript syntax
+"   Dhall
+Plug 'vmchale/dhall-vim'
 
 " Candy
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'romainl/apprentice'
+Plug 'sainnhe/sonokai'
+Plug 'joshdick/onedark.vim'
 Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()                        " required
 
-set number                             " Line nums in gutter
-set ruler                              " Show cursor pos in statusline
-set showmatch                          " Highlight matching brace
+set formatoptions=jcqorl
+set nocompatible
+filetype plugin indent on
+set number
+set ruler
+set showbreak=+++
+set textwidth=0
+set showmatch
 set visualbell
-set laststatus=2                       " Show statusbar in all panes
+set t_vb=
+set laststatus=2                                " Always show statusbar
 set undolevels=1000
 set undofile
 set undodir=$HOME/.vim/vimundo/
-set hidden                             " Allow vim to hide modified buffers
-
-filetype plugin indent on
-syntax on
-
+set hidden                                      " Prevents from exiting w/o saving. (q!)
 set hlsearch
-set ignorecase
-set smartcase
-set incsearch                          " Highlight as you type your search
-
-" Whitespace
-set autoindent                         " Copy indent from current line when starting a new line
-set shiftwidth=4                       " Spaces for each indent
-set tabstop=4                          " Space:tab count when retabbing
-set softtabstop=4                      " Space:tab count when inserting/bsing
-set smartindent                        " Infer indentation on newlines
-set smarttab                           " Treat space chunks like tabs
-set expandtab                          " Spaces not tabs
-set backspace=indent,eol,start         " Backspace whenever
+set smartcase ignorecase
+set incsearch
+set autoindent
+set smartindent
+set smarttab
+set expandtab
+set backspace=indent,eol,start
+set wrap linebreak nolist                       " softwrap
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
-set formatoptions=jcqorl
-set shiftround                         " Round indent to nearest shiftwidth multiple
+                                                " Show whitepsace
+set shiftround
+set nrformats=                                  " Ignores non-decimal number formats (hint courtesy of practical vim, pg 21
 
-" Breaks
-set wrap                               " Softwrap long lines
-set linebreak                          " Try to wrap nicely
-set showbreak=+++
-set textwidth=0                        " Don't break lines on words
+syntax on
+set bg=dark
+highlight Search ctermbg=grey
+set t_Co=256
 
-" Misc
-set nrformats=                         " Ignores non-decimal number formats (courtesy of practical vim, pg 21
+" let g:sonokai_style = 'atlantis'
+" let g:sonokai_enable_italic = 1
+" let g:sonokai_disable_italic_comment = 1
+set termguicolors
 
-" File name tab completion
-set wildmode=longest,list,full
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
+
+" wild/globbing
+set wildmode=list:longest,full
 set wildmenu
 set wildignorecase
 
-noremap <leader>gf :e <cfile><cr>
-
-" Colors
-set termguicolors
-colorscheme tokyonight
-let g:airline_theme = "tokyonight"
-let g:tokyonight_style = 'storm'
-let g:tokyonight_enable_italic = 1
-set bg=dark
-
-" fzf through Git Files
+" FZF
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-y> :Files<CR>
 nnoremap <C-g> :Rg<CR>
 nnoremap <C-b> :Buffers<CR>
+inoremap <expr> <c-x><c-g> fzf#vim#complete#path('rg')
 imap <c-x><c-f> <plug>(fzf-complete-path)
+" imap <c-x><c-l> <plug>(fzf-complete-line)
 autocmd! FileType fzf
 autocmd FileType fzf set laststatus=0 noshowmode noruler
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 "   Use :Fzfc to view changed git files
 command! Fzfc call fzf#run(fzf#wrap( {'source': 'git ls-files --exclude-standard --others --modified'}))
-function! HandleFZF(file)
-    echo a:file
-endfunction
-command! -nargs=1 HandleFZF :call HandleFZF(<f-args>)
+" inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
+" Complete file path relative to current buffer
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
+    \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
+    \ fzf#wrap({'dir': expand('%:p:h')}))
 
-" Move through tabs/buffers with grace
-nnoremap <C-l> <ESC>:tabn <CR>
-nnoremap <C-h> <ESC>:tabp <CR>
-nnoremap <C-j> <ESC>:bn! <CR>
-nnoremap <C-k> <ESC>:bp! <CR>
+" ALE
+map <Leader>] :ALENext<cr>
+map <Leader>[ :ALEPrevious<cr>
+highlight ALEError cterm=underline
+highlight ALEWarning cterm=underline
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" let g:airline_theme='onedark'
+let g:airline_theme = "tokyonight"
+let g:airline#extensions#coc#enabled = 1
+let g:airline_mode_map = {
+        \ '__':    '-',
+        \ 'c':     'C',
+        \ 'i':     'I',
+        \ 'ic':    'I',
+        \ 'ix':    'I',
+        \ 'multi': 'M',
+        \ 'n':     'N',
+        \ 'ni':    '(I)',
+        \ 'no':    'OP PENDING',
+        \ 'R':     'R',
+        \ 'Rv':    'VR',
+        \ 's':     'S',
+        \ 'S':     'SL',
+        \ '':    'SB',
+        \ 't':     'T',
+        \ 'v':     'V',
+        \ 'V':     'V',
+        \ '':      'VB',
+        \ }
+
+
+" store swapfiles in one place instead of litterring them all over
+set directory=$HOME/.vim/swapfiles//
+
+" close netrw buffers
+autocmd FileType netrw setl bufhidden=wipe
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <leader>di <Plug>(coc-diagnostic-info)
+nmap <silent> <leader>dn <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>dp <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>cr <Plug>(coc-rename)
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+"
+" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" " Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+set updatetime=300
+set signcolumn=yes
+" === END coc.nvim === "
+
+" === Custom Bindings === "
+map <C-l> <ESC>:tabn <CR>
+map <C-h> <ESC>:tabp <CR>
+map <C-j> <ESC>:bn! <CR>
+map <C-k> <ESC>:bp! <CR>
+" map <C-p> <ESC>:b# <CR>
+
+" Move to beginning / end of line easier
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L g
+
+noremap gl L
+noremap gh H
+noremap gm M
+
+" Move between panes
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <A-p> :TmuxNavigatePrevious<cr>
+" nnoremap h :TmuxNavigateLeft<CR>
+" nnoremap j :TmuxNavigateDown<CR>
+" nnoremap k :TmuxNavigateUp<CR>
+" nnoremap l :TmuxNavigateRight<CR>
+" nnoremap p :TmuxNavigatePrevious<CR>
+nnoremap <A-h> :TmuxNavigateLeft<CR>
+nnoremap <A-j> :TmuxNavigateDown<CR>
+nnoremap <A-k> :TmuxNavigateUp<CR>
+nnoremap <A-l> :TmuxNavigateRight<CR>
+nnoremap <A-p> :TmuxNavigatePrevious<CR>
 
-" Mark markdown as valid filetype
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+if &diff
+    nmap <leader>gr :diffg REMOTE<cr>
+    nmap <leader>gl :diffg LOCAL<cr>
+endif
+let g:coc_node_path="/home/schimmch/.nvm/versions/node/v10.16.3/bin/node"
 
-" Source coc.nvim settings
-source $HOME/.vim/cocrc.vim
-
-" Don't forget about the ftplugins
-
-let g:vimwiki_list = [
-    \ {'path': '~/zk', 'syntax': 'markdown', 'ext': 'md'},
-    \ {'path': '~/infinite-jest/', 'syntax': 'markdown', 'ext': '.md'}, 
-    \ {'path': '~/dox/sync-notes/', 'syntax': 'markdown', 'ext': 'md'}]
-" By default vimwiki will intereprate all .md files as vimwiki
-let g:vimwiki_global_ext = 0
+" VimWiki
 let g:vimwiki_auto_header = 1
-
-
+" to replace spaces with underscores: 'links_space_char': '_'
+let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.md'}]
+" By default VimWiki will interprate all .md files as VimWiki files. This disables that.
+let g:vimwiki_global_ext = 0 
+" Always append .md extension when creating new items or filling existing items
+" let g:vimwiki_markdown_link_ext = 1

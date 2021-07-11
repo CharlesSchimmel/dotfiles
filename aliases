@@ -1,39 +1,46 @@
-# Pacman
-alias pacs="sudo pacman -S"
-alias pacss="pacman -Ss"
-alias pacr="sudo pacman -R"
-alias pacsyu="sudo pacman -Syu"
-alias pacsyyu="sudo pacman -Syyu"
-
-# Common cli stuff
-alias mkpk="makepkg -cs"
-alias ls="ls -N --color"
+# General
+alias ls="ls --color=auto "
 alias grep="grep --color=auto"
-alias sudo="sudo "
-alias adios="shutdown now"
-alias fk="urxvt & disown"
-alias dx="& disown && exit"
-alias xrload="xrdb -merge .Xresources"
 alias nv="nvim "
-alias tmux="tmux -2"
+alias nvw="nvim -c VimwikiIndex"
+alias note="~/notes/note.sh"
+alias kebab="~/.scripts/kebab.sh"
+alias snake="sed -e 's/[^a-Z0-9 ]//g' -e 's/ \+/_/g'"
+alias camel="sed -e 's/\(\w\+\)/\u\1/g' -e 's/ \+//g'"
+alias today="date +%y%m%d"
 
-# rsync
-alias prv="rsync -rv --progress --append-verify"
-alias rra="rsync -r --append-verify"
-alias pra="rsync -r --progress --append-verify"
-
-# Applications
-alias zath="zathura"
-alias feh="feh -. --auto-rotate"
 
 # Git
-alias groot="git rev-parse --show-toplevel"
-alias gg="git grep "
 alias cdg='cd "$(git rev-parse --show-toplevel)"'
-alias gc="git commit"
+alias groot='git rev-parse --show-toplevel'
+alias thisgit="git rev-parse --abbrev-ref HEAD"
+alias ga="git add "
+alias gc="git commit "
+alias gd="git diff "
+alias gs="git status "
+alias gb="git branch --sort=committerdate"
 alias gca="git commit -a"
-alias ga="git add"
-alias gs="git status"
-alias gd="git diff"
-alias gp="git push"
+alias gcam="bash ~/.scripts/gcam.sh"
+alias gg="git grep"
+alias ggi="git grep -i "
 alias gco="git checkout"
+alias glog="git log"
+alias gp-new="git push --set-upstream origin \$(thisgit)"
+alias gpush-new="git push --set-upstream origin \$(thisgit)"
+alias gp="git push || echo 'Push failed, trying push-new' && gp-new"
+alias gbak=git-backup
+alias icbinb="git fetch origin dev && git merge FETCH_HEAD"
+alias gmdev="git fetch origin dev && git merge FETCH_HEAD"
+alias delete_orig="find ./ -type f -name '*.orig' -delete"
+
+alias git-holdmybeer="git-backup"
+function git-backup () {
+        orig_name="$(git rev-parse --abbrev-ref HEAD)"
+        backup_name="$orig_name-backup"
+        git checkout -b "$backup_name"
+        git checkout "$orig_name"
+}
+
+alias checkin="git commit -m \"$(date +%y%m%d) checkin\""
+
+source "$HOME/.work-aliases"

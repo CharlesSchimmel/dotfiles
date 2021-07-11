@@ -1,0 +1,44 @@
+{
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20,
+  "prettier.tslintIntegration": true,
+  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "html",
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "css",
+    "scss",
+    "xml"
+  ],
+  "diagnostic.errorSign": "•",
+  "diagnostic.warningSign": "•",
+  "diagnostic.infoSign": "•",
+  "diagnostic.enable": true,
+  "diagnostic.messageTarget": "echo",
+  "suggest.enablePreview": true,
+  "suggest.maxPreviewWidth": 80,
+  "coc.preferences.previewAutoClose": true,
+  "coc.preferences.colorSupport": true,
+  "tsserver.log": "verbose",
+  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v10.16.3/bin//npm",
+  "tsserver.implicitProjectConfig.experimentalDecorators": true,
+  "languageserver": {
+    "haskell": {
+      "command": "hie-wrapper",
+      "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
+      "initializationOptions": {},
+      "settings": {
+        "languageServerHaskell": {
+          "hlintOn": true,
+          "maxNumberOfProblems": 10,
+          "completionSnippetsOn": true
+        }
+      }
+    }
+  }
+}
