@@ -36,40 +36,40 @@ Plug 'joshdick/onedark.vim'
 Plug 'romainl/apprentice'
 Plug 'sainnhe/sonokai'
 
-call plug#end()                  " required
+call plug#end()                 " required
 
-set autoindent                   " Copy indent from current line when starting a new line
-set backspace=indent,eol,start   " Backspace whenever
-set expandtab                    " Spaces not tabs
-set formatoptions=jcqorl         " Set formatting default
-set hidden                       " Allow vim to hide modified buffers
-set hlsearch                     " Highlight search results
-set ignorecase                   " Disregard case when searching
-set incsearch                    " Highlight as you type your search
-set laststatus=2                 " Show statusbar in all panes
-set linebreak                    " Try to wrap nicely
+set autoindent                  " Copy indent from current line when starting a new line
+set backspace=indent,eol,start  " Backspace whenever
+set expandtab                   " Spaces not tabs
+set formatoptions=jcqorl        " Set formatting default
+set hidden                      " Allow vim to hide modified buffers
+set hlsearch                    " Highlight search results
+set ignorecase                  " Disregard case when searching
+set incsearch                   " Highlight as you type your search
+set laststatus=2                " Show statusbar in all panes
+set linebreak                   " Try to wrap nicely
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:× list
-set nrformats=                   " Ignores non-decimal number formats (courtesy of practical vim, pg 21
-set number                       " Line nums in gutter
-set ruler                        " Show cursor pos in statusline
-set shiftround                   " Round indent to nearest shiftwidth multiple
-set shiftwidth=4                 " Spaces for each indent
-set showbreak=+++                " When softwrapping prepend wrapped lines with +++
-set showmatch                    " Highlight matching brace
-set smartcase                    " Case-sensitive if search contains Upper
-set smartindent                  " Infer indentation on newlines
-set smarttab                     " Treat space chunks like tabs
-set softtabstop=4                " Space:tab count when inserting/bsing
-set tabstop=4                    " Space:tab count when retabbing
-set textwidth=0                  " Don't break lines on words
-set undodir=$HOME/.vim/vimundo/  " Store undo files here
-set undofile                     " Persist undo across sessions
+set nrformats=                  " Ignores non-decimal number formats (courtesy of practical vim, pg 21
+set number                      " Line nums in gutter
+set ruler                       " Show cursor pos in statusline
+set shiftround                  " Round indent to nearest shiftwidth multiple
+set shiftwidth=4                " Spaces for each indent
+set showbreak=+++               " When softwrapping prepend wrapped lines with +++
+set showmatch                   " Highlight matching brace
+set smartcase                   " Case-sensitive if search contains Upper
+set smartindent                 " Infer indentation on newlines
+set smarttab                    " Treat space chunks like tabs
+set softtabstop=4               " Space:tab count when inserting/bsing
+set tabstop=4                   " Space:tab count when retabbing
+set textwidth=0                 " Don't break lines on words
+set undodir=$HOME/.vim/vimundo/ " Store undo files here
+set undofile                    " Persist undo across sessions
 set undolevels=1000
-set visualbell                   " Flash terminal on bell
+set visualbell                  " Flash terminal on bell
 set wildignorecase
 set wildmenu
 set wildmode=longest,list,full
-set wrap                         " Softwrap long lines
+set wrap                        " Softwrap long lines
 
 filetype plugin indent on
 syntax on
