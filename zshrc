@@ -28,6 +28,7 @@ bindkey '[B' down-line-or-beginning-search
 bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
+set -o ignoreeof
 
 function precmd () {
   window_title="\033]0;${PWD##*/}\007"
