@@ -34,3 +34,8 @@ nnoremap <c-x><c-g> :call fzf#run(fzf#wrap({
     \'prefix': '^.*$',
     \'source': 'rg -n ^ --color always',
     \'options': '--ansi --delimiter : --nth 3..' }))<cr>
+
+" grep for a H1 Header in the first 6 lines and, if found, fold everything
+" before it
+let [lnum, colnum] = searchpos('^# ', '', 6)
+exe '0,'.(lnum-1).'fold'

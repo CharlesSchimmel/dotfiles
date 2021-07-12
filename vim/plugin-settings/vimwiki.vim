@@ -9,9 +9,8 @@ let g:vimwiki_global_ext = 0
 
 fun Template()
     0r !/home/schimmch/notes/template.sh '%'
-    0,5fold
 endfun
-nnoremap <leader>wz ggdap:call Template()<cr>
+nnoremap <leader>wz ggdip:call Template()<cr>
 " 0r: pipe the file name into the script and generate a template
 au BufNewFile **/notes/**.md call Template()
 " (try to) fold the first 5 lines

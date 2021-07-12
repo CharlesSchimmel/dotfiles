@@ -1,5 +1,8 @@
 " FZF
-let g:fzf_preview_window = ['right:60%', 'ctrl-/']
+" show a preview window to the right of the file list
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+" take up less space
+let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.4 } }
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-y> :Files<CR>
 nnoremap <C-g> :Rg<CR>
