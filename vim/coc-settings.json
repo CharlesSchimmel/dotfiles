@@ -24,7 +24,7 @@
   "coc.preferences.previewAutoClose": true,
   "coc.preferences.colorSupport": true,
   "tsserver.log": "verbose",
-  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v10.16.3/bin//npm",
+  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v12.22.3/bin//npm",
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "languageserver": {
     "haskell": {

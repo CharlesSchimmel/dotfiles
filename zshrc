@@ -31,7 +31,7 @@ bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.nvm/versions/node/v10.16.3/bin/"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.nvm/versions/node/v12.22.3/bin/"
 export EDITOR='nvim'
 source "$HOME/.aliases"
 source "$HOME/.projects.sh"

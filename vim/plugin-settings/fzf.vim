@@ -1,4 +1,5 @@
 " FZF
+let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-y> :Files<CR>
 nnoremap <C-g> :Rg<CR>

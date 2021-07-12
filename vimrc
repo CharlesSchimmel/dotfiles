@@ -12,7 +12,8 @@ Plug 'tpope/vim-vinegar'               " enhances netrw
 
 " Navigation/File Management
 Plug 'junegunn/fzf'                    " fuzzy file finder
-            \ , { 'dir':'~/.fzf', 'do':'./install --bin' }
+            \ , { 'do': { -> fzf#install() } }
+            " , { 'dir':'~/.fzf', 'do':'./install --bin' }
 Plug 'junegunn/fzf.vim'                " fuzzy file finder
 
 " IDE ish
@@ -30,11 +31,11 @@ Plug 'vim-airline/vim-airline-themes'  " WISL
 Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
 
 " Candy
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ghifarit53/tokyonight-vim'
-Plug 'joshdick/onedark.vim'
 Plug 'romainl/apprentice'
-Plug 'sainnhe/sonokai'
+" Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'joshdick/onedark.vim'
+" Plug 'sainnhe/sonokai'
 
 call plug#end()                 " required
 

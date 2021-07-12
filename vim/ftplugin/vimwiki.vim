@@ -11,22 +11,22 @@ inoremap <expr> <c-x><m-c-f> fzf#vim#complete#path(
     \ fzf#wrap({'dir': expand('%:p:h')}))
 
 function! HandleFZF(file)
-    let basename_extensionless = fnamemodify(a:file, ":r:t")
+    let basename_extensionless = fnamemodify(a:file, ":t:r")
     let clean_spaces = substitute(basename_extensionless, "\\", "", "g")
-    let no_prefix = substitute(clean_spaces, "^[l-z][0-9a-b][0-9a-z] ", "", "")
+    let no_prefix = substitute(clean_spaces, "^[l-z][0-9a-c][0-9a-z] ", "", "")
     let titled = substitute(no_prefix, "\\<\\w", "\\U\\0", "g")
-     " Insert the markdown link to the file in the current buffer
     let mdlink = "[[".clean_spaces."|".titled."]]"
-    put=mdlink
+    "put=mdlink
+    exe "normal! a" . mdlink . "\<Esc>"
 endfunction
 
 command! -nargs=1 HandleFZF :call HandleFZF(<f-args>)
-inoremap <c-x><c-f> :call fzf#run(fzf#wrap({'sink': 'HandleFZF'}))<cr>
-inoremap <c-x><c-g> :call fzf#run(fzf#wrap({
+inoremap <c-x><c-f> <esc>:call fzf#run(fzf#wrap({'sink': 'HandleFZF'}))<cr>a
+inoremap <c-x><c-g> <esc>:call fzf#run(fzf#wrap({
     \'sink': 'HandleFZF', 
     \'prefix': '^.*$',
     \'source': 'rg -n ^ --color always',
-    \'options': '--ansi --delimiter : --nth 3..' }))<cr>
+    \'options': '--ansi --delimiter : --nth 3..' }))<cr>a
 
 nnoremap <c-x><c-f> :call fzf#run(fzf#wrap({'sink': 'HandleFZF'}))<cr>
 nnoremap <c-x><c-g> :call fzf#run(fzf#wrap({
@@ -34,4 +34,3 @@ nnoremap <c-x><c-g> :call fzf#run(fzf#wrap({
     \'prefix': '^.*$',
     \'source': 'rg -n ^ --color always',
     \'options': '--ansi --delimiter : --nth 3..' }))<cr>
-
