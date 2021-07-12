@@ -11,9 +11,9 @@ inoremap <expr> <c-x><m-c-f> fzf#vim#complete#path(
     \ fzf#wrap({'dir': expand('%:p:h')}))
 
 function! HandleFZF(file)
-    let basename_extensionless = fnamemodify(a:file, ":r:t")
+    let basename_extensionless = fnamemodify(a:file, ":t:r")
     let clean_spaces = substitute(basename_extensionless, "\\", "", "g")
-    let no_prefix = substitute(clean_spaces, "^[l-z][0-9a-b][0-9a-z] ", "", "")
+    let no_prefix = substitute(clean_spaces, "^[l-z][0-9a-c][0-9a-z] ", "", "")
     let titled = substitute(no_prefix, "\\<\\w", "\\U\\0", "g")
     let mdlink = "[[".clean_spaces."|".titled."]]"
     "put=mdlink
@@ -35,3 +35,7 @@ nnoremap <c-x><c-g> :call fzf#run(fzf#wrap({
     \'source': 'rg -n ^ --color always',
     \'options': '--ansi --delimiter : --nth 3..' }))<cr>
 
+" grep for a H1 Header in the first 6 lines and, if found, fold everything
+" before it
+let [lnum, colnum] = searchpos('^# ', '', 6)
+exe '0,'.(lnum-1).'fold'

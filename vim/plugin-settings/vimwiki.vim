@@ -1,15 +1,20 @@
+let g:vimwiki_auto_header = 0
 let g:vimwiki_list = [
     \ {'path': '~/zk', 'syntax': 'markdown', 'ext': 'md'},
     \ {'path': '~/infinite-jest/', 'syntax': 'markdown', 'ext': '.md'}, 
     \ {'path': '~/dox/sync-notes/', 'syntax': 'markdown', 'ext': 'md'}]
 " Without this option vimwiki will intereprate all .md files as vimwiki
 let g:vimwiki_global_ext = 0
-" Title file with an H1 with the file name on new file
-" let g:vimwiki_auto_header = 1
+" Always append .md extension when creating new items or filling existing items
+" let g:vimwiki_markdown_link_ext = 1
+" to replace spaces with underscores: 'links_space_char': '_'
 
+fun Template()
+    0r !/home/schimmch/notes/template.sh '%'
+endfun
+nnoremap <leader>wz ggdip:call Template()<cr>
 " 0r: pipe the file name into the script and generate a template
-au BufNewFile ~/zk/*.md 0r !~/zk/template.sh '%'
-au BufNewFile ~/zk/*.md ks|:normal ggzf4j|'s
+au BufNewFile ~/zk/*.md call Template()
 
 " from the helpfiles 'skeleton template'
 " if a file has 'updated:' in the first lines, update that with today's date
