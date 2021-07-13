@@ -19,13 +19,18 @@ au BufNewFile ~/zk/*.md call Template()
 
 " from the helpfiles 'skeleton template'
 " if a file has 'updated:' in the first lines, update that with today's date
-autocmd BufWritePre,FileWritePre ~/zk/*.md   ks|call LastMod()|'s
+autocmd BufWritePre,FileWritePre ~/zk/*.md call UpdateLastMod()
+fun UpdateLastMod()
+    let last_pos = getcurpos()
+    call LastMod()
+    keepjumps call setpos('.', last_pos)
+endfun
+
 fun LastMod()
     if line("$") > 5
         let l = 5
     else
         let l = line("$")
     endif
-    exe "1," . l . "g/updated: /s/updated: .*/updated: " .
-    \ strftime("%Y-%m-%d")
+    keepjumps exe "1," . l . "g/updated: /s/updated: .*/updated: " . strftime("%Y-%m-%d")
 endfun
