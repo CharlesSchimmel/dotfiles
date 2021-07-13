@@ -10,7 +10,8 @@ let g:vimwiki_global_ext = 0
 " to replace spaces with underscores: 'links_space_char': '_'
 
 fun Template()
-    0r !/home/schimmch/notes/template.sh '%'
+    0r !~/zk/template.sh '%'
+    exe '0,5fold'
 endfun
 nnoremap <leader>wz ggdip:call Template()<cr>
 " 0r: pipe the file name into the script and generate a template
