@@ -18,7 +18,7 @@ au BufNewFile **/notes/**.md call Template()
 
 " from the helpfiles 'skeleton template'
 " if a file has 'updated:' in the first lines, update that with today's date
-autocmd BufWritePre,FileWritePre **/notes/**.md   ks|call LastMod()|'s
+autocmd BufWritePre,FileWritePre **/notes/**.md ks|call LastMod()|:norm g`s
 fun LastMod()
     if line("$") > 5
         let l = 5
