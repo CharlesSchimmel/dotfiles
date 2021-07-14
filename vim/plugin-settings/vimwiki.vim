@@ -17,7 +17,7 @@ au BufNewFile **/notes/**.md call Template()
 " if a file has 'updated:' in the first lines, update that with today's date
 autocmd BufWritePre,FileWritePre **/notes/**.md call UpdateLastMod()
 fun UpdateLastMod()
-    let las_pos = getcurpos()
+    let last_pos = getcurpos()
     call LastMod()
     keepjumps call setpos('.', last_pos)
 endfun
