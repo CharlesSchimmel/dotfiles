@@ -11,7 +11,7 @@ inoremap <expr> <c-x><m-c-f> fzf#vim#complete#path(
     \ fzf#wrap({'dir': expand('%:p:h')}))
 
 function! HandleFZF(file)
-    " set fo+=a
+    set fo-=ta
     let basename_extensionless = fnamemodify(a:file, ":t:r")
     let clean_spaces = substitute(basename_extensionless, "\\", "", "g")
     let no_prefix = substitute(clean_spaces, "^[l-z][0-9a-c][0-9a-z] ", "", "")
@@ -19,7 +19,7 @@ function! HandleFZF(file)
     let mdlink = "[[".clean_spaces."|".titled."]]"
     "put=mdlink
     exe "normal! a" . mdlink . "\<Esc>"
-    " set fo-=a
+    set fo+=ta
 endfunction
 
 command! -nargs=1 HandleFZF :call HandleFZF(<f-args>)
@@ -44,7 +44,8 @@ nnoremap <c-x><c-g> :call fzf#run(fzf#wrap({
 " exe '0,'.(lnum-1).'fold'
 
 function! MkNewLink()
-  set fo-=a
+  " fo-=t might suffice
+  set fo-=ta
   let curline = getline('.')
   call inputsave()
   let name = input('Link title: ')
@@ -54,7 +55,7 @@ function! MkNewLink()
   let wholething = '[['.filename.'|'.titled.']]'
   call inputrestore()
   exe "normal! a" . wholething
-  set fo+=a
+  set fo+=ta
 endfunction
 
 inoremap <c-x><c-l> <esc>:call MkNewLink()<cr>
