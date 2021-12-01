@@ -37,8 +37,8 @@ alias git-holdmybeer="git-backup"
 function git-backup () {
         orig_name="$(git rev-parse --abbrev-ref HEAD)"
         backup_name="$orig_name-backup"
-        git checkout -b "$backup_name"
-        git checkout "$orig_name"
+        git branch "$backup_name" "$orig_name"
+        echo "Branch created: $backup_name"
 }
 
 alias checkin="git commit -m \"$(date +%y%m%d) checkin\""

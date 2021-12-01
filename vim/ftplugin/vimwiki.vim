@@ -14,7 +14,7 @@ function! HandleFZF(file)
     set fo-=ta
     let basename_extensionless = fnamemodify(a:file, ":t:r")
     let clean_spaces = substitute(basename_extensionless, "\\", "", "g")
-    let no_prefix = substitute(clean_spaces, "^[l-z][0-9a-c][0-9a-z] ", "", "")
+    let no_prefix = substitute(clean_spaces, "^[l-z][a-c0-9][a-z0-9] ", "", "")
     let titled = substitute(no_prefix, "\\(\\<\\w\\)", "\\U\\1", "g")
     let mdlink = "[[".clean_spaces."|".titled."]]"
     "put=mdlink
@@ -52,11 +52,18 @@ function! MkNewLink()
   let date = system('/home/schimmch/.scripts/date62.sh')
   let titled=substitute(name, "\\<\\w", "\\U\\0", "g")
   let filename = date.' '.name
+  if (expand('%:p:h') =~ 'diary') " extremely dirty check to see if we're in the diary dir
+      let filename = '../zk/'.filename
+  endif
   let wholething = '[['.filename.'|'.titled.']]'
   call inputrestore()
   exe "normal! a" . wholething
   set fo+=ta
 endfunction
 
-inoremap <c-x><c-l> <esc>:call MkNewLink()<cr>
-nnoremap <c-x><c-l> :call MkNewLink()<cr>
+inoremap <c-l> <esc>:call MkNewLink()<cr>
+nnoremap <c-n><c-l> :call MkNewLink()<cr>
+
+hi link VimwikiLink blue
+
+:GitGutterBufferDisable

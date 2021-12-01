@@ -11,7 +11,13 @@ fun Template()
 endfun
 nnoremap <leader>wz ggdip:call Template()<cr>
 " 0r: pipe the file name into the script and generate a template
-au BufNewFile **/notes/**.md call Template()
+au BufNewFile **/notes/zk/**.md call Template()
+
+fun DiaryTemplate()
+    0r !/home/schimmch/notes/diary_template.sh '%'
+endfun
+" 0r: pipe the file name into the script and generate a template
+au BufNewFile **/notes/diary/**.md call DiaryTemplate()
 
 " from the helpfiles 'skeleton template'
 " if a file has 'updated:' in the first lines, update that with today's date
