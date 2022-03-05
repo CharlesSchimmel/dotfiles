@@ -2,9 +2,9 @@
 
 base62=( $(printf '%s ' {0..9}; printf '%s ' {a..z}; printf '%s ' {A..Z};) )
 
-year=$(date +%y)
-month=$(date +%m)
-day=$(date +%d)
+year=$(date +%-y)
+month=$(date +%-m)
+day=$(date +%-d)
 
 year62=${base62[$year]}
 month62=${base62[$month]}

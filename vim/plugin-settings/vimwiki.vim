@@ -34,3 +34,5 @@ fun LastMod()
     endif
     keepjumps exe "1," . l . "g/updated: /s/updated: .*/updated: " . strftime("%Y-%m-%d")
 endfun
+
+hi link VimwikiLink Blue

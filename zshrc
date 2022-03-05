@@ -30,15 +30,19 @@ bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
 set -o ignoreeof
 
-function precmd () {
-  window_title="\033]0;${PWD##*/}\007"
-  echo -ne "$window_title"
-}
+# ???
+# function precmd () {
+#   window_title="\033]0;${PWD##*/}\007"
+#   echo -ne "$window_title"
+# }
 
 export PATH=$PATH":$HOME/.local/bin:$HOME/.npm-global/bin"
 export EDITOR='nvim'
+export GPODDER_HOME="/mnt/nas/Podcasts/"
 source $HOME/.aliases
 source $HOME/.ghcup/env
 source /usr/share/zsh/plugins/clipboard.zsh 
+source "$HOME/.local/share/lscolors.sh"
 # if [ -e /home/elpfen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/elpfen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting
+source /usr/share/nvm/init-nvm.sh

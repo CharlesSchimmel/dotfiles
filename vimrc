@@ -34,6 +34,7 @@ Plug 'tidalcycles/vim-tidal'
 
 " Candy
 Plug 'ghifarit53/tokyonight-vim'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()                 " required
 

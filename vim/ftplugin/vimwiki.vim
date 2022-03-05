@@ -20,6 +20,7 @@ function! HandleFZF(file)
     "put=mdlink
     exe "normal! a" . mdlink . "\<Esc>"
     set fo+=a
+    write
 endfunction
 
 command! -nargs=1 HandleFZF :call HandleFZF(<f-args>)
@@ -37,11 +38,11 @@ nnoremap <c-x><c-g> :call fzf#run(fzf#wrap({
     \'source': 'rg -n ^ --color always',
     \'options': '--ansi --delimiter : --nth 3..' }))<cr>
 
-" " grep for a H1 Header in the first 6 lines and, if found, fold everything
-" " before it
-" let [lnum, colnum] = searchpos('^# ', '', 6)
-" exe '0,6foldo'
-" exe '0,'.(lnum-1).'fold'
+" grep for a H1 Header in the first 6 lines and, if found, fold everything
+" before it
+let [lnum, colnum] = searchpos('^# ', '', 6)
+silent! exe '0,6foldo'
+exe '0,'.(lnum-1).'fold'
 
 function! MkNewLink()
   set fo-=a
@@ -55,7 +56,8 @@ function! MkNewLink()
   call inputrestore()
   exe "normal! a" . wholething
   set fo+=a
+  write
 endfunction
 
-inoremap <c-x><c-l> <esc>:call MkNewLink()<cr>
-nnoremap <c-x><c-l> :call MkNewLink()<cr>
+inoremap <c-l> <esc>:call MkNewLink()<cr>
+nnoremap <c-n><c-l> :call MkNewLink()<cr>
