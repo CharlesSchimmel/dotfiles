@@ -2,6 +2,7 @@
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
   "prettier.tslintIntegration": true,
+  "prettier.eslintIntegration": true,
   "coc.preferences.hoverTarget": "float",
   "coc.preferences.formatOnSaveFiletypes": [
     "html",
@@ -24,7 +25,7 @@
   "coc.preferences.previewAutoClose": true,
   "coc.preferences.colorSupport": true,
   "tsserver.log": "verbose",
-  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v12.22.3/bin//npm",
+  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v16.13.1/bin/npm",
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "languageserver": {
     "haskell": {

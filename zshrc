@@ -31,7 +31,7 @@ bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.nvm/versions/node/v12.22.3/bin/"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.local/bin:/home/schimmch/.npm-global/bin/:/home/schimmch/.nvm/versions/node/v16.13.1/bin/"
 export EDITOR='nvim'
 source "$HOME/.aliases"
 source "$HOME/.projects.sh"
@@ -40,9 +40,9 @@ eval $(dircolors -b $HOME/.ls_colors/LS_COLORS)
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [ -z "$TMUX" ]; then
     tmux -2 attach || exec tmux -2 new-session

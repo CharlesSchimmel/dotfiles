@@ -30,4 +30,4 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 set updatetime=300
 set signcolumn=yes
-let g:coc_node_path="/home/schimmch/.nvm/versions/node/v12.22.3/bin/node"
+let g:coc_node_path="/home/schimmch/.nvm/versions/node/v16.13.1/bin/node"

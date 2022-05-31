@@ -8,7 +8,7 @@ filename="$(basename "$@" '.md')"
 prefix="$(printf "%s" "$filename" | sed 's/^\([a-z][0-9a-c][0-9a-z]\).\+/\1/g')"
 rest_of_title="$(printf "%s" "$filename" | sed 's/^[a-z][0-9a-c][0-9a-z]\(.\+\)/\1/g')"
 title_cased="$(echo $rest_of_title | sed -e 's/.*/\L&/; s/[a-z]*/\u&/g' -e 's/^[l-z]../\U&/g')"
-title="$prefix $title_cased"
+title="$title_cased"
 
 cat << EOF
 ---
@@ -16,5 +16,4 @@ title: $title
 date: $(date +%Y-%m-%d)
 updated: $(date +%Y-%m-%d)
 ---
-# $title
 EOF
