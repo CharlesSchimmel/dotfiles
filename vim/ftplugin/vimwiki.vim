@@ -52,7 +52,7 @@ function! MkNewLink()
   let date = system('~/.scripts/date62.sh')
   let titled=substitute(name, "\\<\\w", "\\U\\0", "g")
   let filename = date.' '.name
-  let wholething = '[['.filename.'|'.titled.']]'
+  let wholething = '['.titled.'](<'.filename.'>)'
   call inputrestore()
   exe "normal! a" . wholething
   set fo+=a

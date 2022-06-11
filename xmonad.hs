@@ -1,3 +1,5 @@
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
 --------------------------------------------------------------------------------
 -- | Example.hs
 --
@@ -8,6 +10,7 @@ module Main
     ) where
 
 import           Data.Foldable
+import           Data.Maybe
 
 --------------------------------------------------------------------------------
 import           System.Exit
@@ -51,21 +54,20 @@ myGaps = gaps [(U, 5), (D, 5), (R, 5), (L, 5)]
 
 startupCmds =
     [ "~/.cabal/bin/xmobar"
-        , "syndaemon -i 1 -t"
-        , "pgrep mpd || mpd"
-        , "pgrep mpdscribble || mpdscribble"
-            -- , "pgrep compton || compton --xrender-sync-fence" -- 20191221 seems to be causing issues
-        , "pgrep syncthing || syncthing -no-browser"
-        , "feh --randomize --bg-fill ~/pics/walls2/*"
-        , "pgrep redshift || redshift -l 41.6195:-93.5980 -t 6500:4000"
-        ]
-        <> trayApps
+    , "syndaemon -i 1 -t"
+    , "pgrep mpd || mpd"
+    , "pgrep mpdscribble || mpdscribble"
+    , "pgrep compton || compton --xrender-sync-fence" -- 20191221 seems to be causing issues
+    , "pgrep syncthing || syncthing -no-browser"
+    , "feh --randomize --bg-fill ~/pics/walls2/*"
+    , "pgrep redshift || redshift -l 41.6195:-93.5980 -t 6500:4000"
+    ]
 
 trayApps = ["stalonetray", "keepassxc", "nm-applet"]
 
 --------------------------------------------------------------------------------
 main = do
-    traverse_ spawn startupCmds
+    traverse_ spawn $ startupCmds <> trayApps
     -- Start xmonad using the main desktop configuration with a few
     -- simple overrides:
     xmonad
@@ -80,105 +82,111 @@ main = do
                         , focusedBorderColor = darkCyanHex
                         , normalBorderColor  = xmobarBG
                         }
-        `additionalKeys` -- Add some extra key bindings:
-                         [ m_s xK_q $ pure () -- override
-        -- , ((m_s,  xK_q),             pure ())
-                         , (meta xK_0, windows . W.view $ myWorkspaces !! 10)
-                         , ((m_c, xK_l), sendMessage Expand)
-                         , ((m_c, xK_h), sendMessage Shrink)
-                         , ( (m_c, xK_Escape)
-                           , confirmPrompt myXPConfig "exit" (io exitSuccess)
-                           )
-                         , m_s xK_Escape
-                             $ spawn
-                                   "sleep 1; xset dpms force off && i3lock -n && xset dpms force on"
-                         , m_s xK_p $ shellPrompt myXPConfig
-                         , m xK_l $ windows W.focusDown
-                         , m xK_h $ windows W.focusUp
-                         , m_s xK_l $ windows W.swapDown
-                         , m_s xK_h $ windows W.swapUp
-                         , m xK_Left $ windows W.focusUp
-                         , m xK_Right $ windows W.focusDown
-                         , m_s xK_Left $ windows W.swapUp
-                         , m_s xK_Right $ windows W.swapDown
-                         , m xK_p $ shellPrompt myXPConfig
-                         , m xK_f $ sendMessage (Toggle "Full")
-                         , m xK_Return $ spawn "kitty"
-                         , ( (altl, xK_w)
-                           , spawn "feh --randomize --bg-fill ~/pics/walls2/*"
-                           )
-                         , ((altl, xK_s), spawnOn "5" "steam")
-                         , ((altl, xK_q), spawn "qutebrowser")
-                         , ((altl, xK_f), spawn "firefox")
-                         , ( (altl, xK_d)
-                           , spawn "rofi -show run -location 2 -yoffset 18"
-                           )
-                         , ((altl, xK_n), spawn "thunar")
-                         , ( (winl, xK_grave)
-                           , namedScratchpadAction scratchpads "ncmpcpp"
-                           )
-                         , (x xF86XK_AudioPlay, spawn "mpc toggle")
-                         , (x xF86XK_AudioPrev, spawn "mpc prev")
-                         , (x xF86XK_AudioNext, spawn "mpc next")
-                         , ( x xF86XK_AudioMute
-                           , spawn "pactl set-sink-mute 0 toggle"
-                           )
-                         , ( x xF86XK_AudioRaiseVolume
-                           , spawn "pactl set-sink-volume 0 +10%"
-                           )
-                         , ( x xF86XK_AudioLowerVolume
-                           , spawn "pactl set-sink-volume 0 -10%"
-                           )
-                         , ( (ctl, xF86XK_AudioRaiseVolume)
-                           , spawn "pactl set-sink-volume 0 +5%"
-                           )
-                         , ( (ctl, xF86XK_AudioLowerVolume)
-                           , spawn "pactl set-sink-volume 0 -5%"
-                           )
-                         , x_ xF86XK_MonBrightnessUp $ spawn "xbacklight -inc 5"
-                         , x_ xF86XK_MonBrightnessDown
-                             $ spawn "xbacklight -dec 5"
-                         , ( (ctl, xF86XK_MonBrightnessUp)
-                           , spawn "xbacklight -set 100"
-                           )
-                         , ( (ctl, xF86XK_MonBrightnessDown)
-                           , spawn "xbacklight -set 10"
-                           )
-                         ]
-  where
-    ctl      = controlMask
-    winl     = mod4Mask
-    altl     = mod1Mask
-    nmm      = noModMask
-    winShift = winl .|. shiftMask
-    m_c      = winl .|. controlMask
-    c        = (,) controlMask
-    meta     = (,) mod4Mask -- meta/win key
-    a        = (,) mod1Mask -- alt key
-    x        = (,) noModMask
-    x_ a b = ((noModMask, a), b)
-    m x y = ((mod4Mask, x), y) -- win + key
-    m_s x y = ((winShift, x), y) -- win + shift + key
-    mediaKeys = []
+        `additionalKeys` keybindings
 
+keybindings :: [((KeyMask, KeySym), X ())]
+keybindings = mapMaybe
+    fromBinding
+    [ win @> sft @> xK_q @> (pure () :: X ()) -- override
+    , win @> xK_0 @> (windows . W.view $ myWorkspaces !! 10)
+    , win @> ctl @> xK_l @> sendMessage Expand
+    , win @> ctl @> xK_h @> sendMessage Shrink
+    , win @> ctl @> xK_Escape @> confirmPrompt myXPConfig
+                                               "exit"
+                                               (io exitSuccess)
+    , win @> sft @> xK_Escape @> spawn_
+        "sleep 1; xset dpms force off && i3lock -n && xset dpms force on"
+    , win @> sft @> xK_p @> shellPrompt myXPConfig
+    , win @> xK_l @> windows W.focusDown
+    , win @> xK_h @> windows W.focusUp
+    , win @> sft @> xK_l @> windows W.swapDown
+    , win @> sft @> xK_h @> windows W.swapUp
+    , win @> xK_Left @> windows W.focusUp
+    , win @> xK_Right @> windows W.focusDown
+    , win @> sft @> xK_Left @> windows W.swapUp
+    , win @> sft @> xK_Right @> windows W.swapDown
+    , win @> xK_p @> shellPrompt myXPConfig
+    , win @> xK_f @> sendMessage (Toggle "Full")
+    , win @> xK_Return @> spawn_ "kitty"
+    , alt @> xK_w @> spawn_ "feh --randomize --bg-fill ~/pics/walls2/*"
+    , alt @> xK_s @> spawnOn "5" "steam"
+    , alt @> xK_q @> spawn_ "qutebrowser"
+    , alt @> xK_f @> spawn_ "firefox"
+    , alt @> xK_d @> spawn_ "rofi -show run -location 2 -yoffset 18"
+    , alt @> xK_n @> spawn_ "thunar"
+    , win @> xK_grave @> namedScratchpadAction scratchpads "ncmpcpp"
+    , xF86XK_AudioPlay @> spawn_ "mpc toggle"
+    , xF86XK_AudioPrev @> spawn_ "mpc prev"
+    , xF86XK_AudioNext @> spawn_ "mpc next"
+    , xF86XK_AudioMute @> spawn_ "pactl set-sink-mute 0 toggle"
+    , xF86XK_AudioRaiseVolume @> spawn_ "pactl set-sink-volume 0 +10%"
+    , xF86XK_AudioLowerVolume @> spawn_ "pactl set-sink-volume 0 -10%"
+    , ctl @> xF86XK_AudioRaiseVolume @> spawn_ "pactl set-sink-volume 0 +5%"
+    , ctl @> xF86XK_AudioLowerVolume @> spawn_ "pactl set-sink-volume 0 -5%"
+    , xF86XK_MonBrightnessUp @> spawn_ "xbacklight -inc 5"
+    , xF86XK_MonBrightnessDown @> spawn_ "xbacklight -dec 5"
+    , ctl @> xF86XK_MonBrightnessUp @> spawn_ "xbacklight -set 100"
+    , ctl @> xF86XK_MonBrightnessDown @> spawn_ "xbacklight -set 10"
+    , win @> xF86XK_MonBrightnessUp @> spawn_
+        "xrandr --output eDP-1 --off && xrandr --output eDP-1 --auto"
+    , win @> ctl @> xF86XK_MonBrightnessUp @> spawn_
+        "xrandr --output eDP-1 --off && xrandr --output eDP-1 --auto"
+    ]
 
-bind :: Monad m => Mod -> KeySym -> m () -> ((KeyMask, KeySym), m ())
-bind mod key thing = ((unMod mod, key), thing)
+spawn_ :: String -> X ()
+spawn_ = spawn
 
-ctl = Mod controlMask
-win = Mod mod4Mask
-alt = Mod mod1Mask
-shift = Mod shiftMask
-plain = Mod noModMask
+fromBinding :: Binding -> Maybe ((KeyMask, KeySym), X ())
+fromBinding (Binding mask sym action) = do
+    sym_    <- sym
+    action_ <- action
+    pure ((mask, sym_), action_)
 
-newtype Mod = Mod { unMod :: KeyMask }
+instance Semigroup KeyMask where
+    (<>) = (.|.)
 
-instance Semigroup Mod where
-    (Mod m1) <> (Mod m2) = Mod (m1 .|. m2)
+data Binding = Binding
+    { modifiers :: KeyMask
+    , key       :: Maybe KeySym
+    , action    :: Maybe (X ())
+    }
+    deriving Show
 
-instance Monoid Mod where
-    mappend = (<>)
-    mempty  = Mod noModMask
+instance Show (X ()) where
+    show _ = "X ()"
+
+type XAction = X ()
+
+emptyBinding = Binding noModMask Nothing Nothing
+
+class Bindable a where
+  mkBind :: a -> Binding
+
+infixl 5 @>
+(@>) :: (Bindable a, Bindable b) => b -> a -> Binding
+b @> a = mkBind a <> mkBind b
+
+instance Bindable Binding where
+    mkBind = id
+
+instance Bindable (X ()) where
+    mkBind x = emptyBinding { action = Just x }
+
+instance Bindable KeyMask where
+    mkBind km = emptyBinding { modifiers = km }
+
+instance Bindable KeySym where
+    mkBind a = emptyBinding { key = Just a }
+
+instance Semigroup Binding where
+    (Binding maskA symA actionA) <> (Binding maskB symB actionB) =
+        Binding (maskA .|. maskB) (symA *> symB) (actionA *> actionB)
+
+ctl = controlMask
+win = mod4Mask
+alt = mod1Mask
+sft = shiftMask
+nomod = noModMask
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

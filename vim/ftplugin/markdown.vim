@@ -10,3 +10,9 @@ hi clear Conceal
 
 set formatoptions=tcroqwanlj
 set comments=fb:*,fb:-,fb:+,fb:1.,n:> 
+iab \-> →
+iab \<- ←
+iab uprrw ↑
+iab dnrrw ↓
+iab larrw →
+iab rarrw ←
