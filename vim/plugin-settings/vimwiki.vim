@@ -1,7 +1,6 @@
 let g:vimwiki_auto_header = 0
 let g:vimwiki_list = [
     \ {'path': '~/zk', 'syntax': 'markdown', 'ext': 'md'},
-    \ {'path': '~/infinite-jest/', 'syntax': 'markdown', 'ext': '.md'}, 
     \ {'path': '~/dox/sync-notes/', 'syntax': 'markdown', 'ext': 'md'}]
 " Without this option vimwiki will intereprate all .md files as vimwiki
 let g:vimwiki_global_ext = 0
