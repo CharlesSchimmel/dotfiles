@@ -1,13 +1,27 @@
-alias ls="ls --color=auto "
+# Common cli stuff
+alias mkpk="makepkg -cs"
+alias ls="ls -N --color"
+alias grep="grep --color=auto"
+alias sudo="sudo "
+alias adios="shutdown now"
 alias nv="nvim "
-alias note="~/.scripts/notes.sh"
+alias tmux="tmux -2"
+
+# rsync
+alias prv="rsync -rv --progress --append-verify"
+alias rra="rsync -r --append-verify"
+alias pra="rsync -r --progress --append-verify"
+
+# Git
+alias groot="git rev-parse --show-toplevel"
+alias gg="git grep "
 alias cdg='cd "$(git rev-parse --show-toplevel)"'
-alias groot='git rev-parse --show-toplevel'
-alias gitgitgitgitgotgotgotgot='cat ~/.gitgot'
-alias did="nvim +'normal Go' +'r!date' ~/did.txt"
-alias gita="git add "
-alias gitc="git commit "
-alias gitd="git diff "
-alias gits="git status "
-alias gitca="git commit -a"
-alias gitg="git grep"
+alias gc="git commit"
+alias gca="git commit -a"
+alias ga="git add"
+alias gs="git status"
+alias gd="git diff"
+alias gp="git push"
+alias gco="git checkout"
+alias glog="git log"
+alias resetdisplay="xrandr --output eDP-1 --off && xrandr --output eDP-1 --auto"
