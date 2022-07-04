@@ -13,7 +13,7 @@ setopt appendhistory autocd extendedglob nomatch notify share_history
 bindkey -v
 
 autoload -Uz promptinit && promptinit
-PROMPT='%F{blue}δ%f '
+PROMPT='%F{magenta}δ%f '
 RPROMPT='%~'
 
 autoload -U up-line-or-beginning-search
@@ -27,7 +27,9 @@ bindkey 'OB' down-line-or-beginning-search
 bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
+set -o ignoreeof
 
 export PATH=$PATH":$HOME/.local/bin"
 export EDITOR='nvim'
 source "$HOME/.aliases"
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting
