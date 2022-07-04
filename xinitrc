@@ -44,7 +44,7 @@ xcape -e 'Shift_L=Tab'
 
 setxkbmap -layout dvorak
 touch /tmp/q_to_d
-$HOME/.cabal/bin/xmonad
+$HOME/.local/bin/xmonad
 # xfce4-session
 
 # exec i3

@@ -62,7 +62,7 @@ function! MkNewLink()
   call inputsave()
   let name = input('Link title: ')
   if (!empty(name))
-    let date = system('/home/schimmch/.scripts/date62.sh')
+    let date = system('$HOME/.scripts/date62.sh')
     let titled=substitute(name, "\\<\\w", "\\U\\0", "g")
     let sanitized=substitute(name, "[^a-zA-Z0-9-_ ]", "", "g")
     let filename = date.' '.sanitized
