@@ -10,6 +10,7 @@ module Main
     ) where
 
 import           Data.Foldable
+import qualified Data.Map                      as M
 import           Data.Maybe
 
 --------------------------------------------------------------------------------
@@ -53,7 +54,7 @@ mySpacing = spacingRaw False (Border 5 5 5 5) True (Border 5 5 5 5) True
 myGaps = gaps [(U, 5), (D, 5), (R, 5), (L, 5)]
 
 startupCmds =
-    [ "~/.cabal/bin/xmobar"
+    [ "~/.local/bin/xmobar"
     , "syndaemon -i 1 -t"
     , "pgrep mpd || mpd"
     , "pgrep mpdscribble || mpdscribble"
@@ -70,12 +71,13 @@ main = do
     traverse_ spawn $ startupCmds <> trayApps
     -- Start xmonad using the main desktop configuration with a few
     -- simple overrides:
+    xmobarH <- spawnPipe "~/.local/bin/xmobar"
     xmonad
         . docks
         $ desktopConfig { modMask            = mod4Mask -- Use the "Win" key for the mod key
                         , manageHook = myManageHook <+> manageHook desktopConfig
                         , layoutHook = avoidStruts . mySpacing $ myLayouts
-                        , logHook            = myLogHook
+                        , logHook            = myLogHook xmobarH
                         , borderWidth        = 1
                         , focusFollowsMouse  = False
                         , workspaces         = myWorkspaces
@@ -85,18 +87,10 @@ main = do
         `additionalKeys` keybindings
 
 keybindings :: [((KeyMask, KeySym), X ())]
-keybindings = mapMaybe
-    fromBinding
+keybindings = mapMaybe fromBinding bindings_
+bindings_ =
     [ win @> sft @> xK_q @> (pure () :: X ()) -- override
     , win @> xK_0 @> (windows . W.view $ myWorkspaces !! 10)
-    , win @> ctl @> xK_l @> sendMessage Expand
-    , win @> ctl @> xK_h @> sendMessage Shrink
-    , win @> ctl @> xK_Escape @> confirmPrompt myXPConfig
-                                               "exit"
-                                               (io exitSuccess)
-    , win @> sft @> xK_Escape @> spawn_
-        "sleep 1; xset dpms force off && i3lock -n && xset dpms force on"
-    , win @> sft @> xK_p @> shellPrompt myXPConfig
     , win @> xK_l @> windows W.focusDown
     , win @> xK_h @> windows W.focusUp
     , win @> sft @> xK_l @> windows W.swapDown
@@ -105,15 +99,25 @@ keybindings = mapMaybe
     , win @> xK_Right @> windows W.focusDown
     , win @> sft @> xK_Left @> windows W.swapUp
     , win @> sft @> xK_Right @> windows W.swapDown
-    , win @> xK_p @> shellPrompt myXPConfig
     , win @> xK_f @> sendMessage (Toggle "Full")
+    , win @> ctl @> xK_l @> sendMessage Expand
+    , win @> ctl @> xK_h @> sendMessage Shrink
+    , win @> xK_p @> shellPrompt myXPConfig
+    , win @> xK_z @> withFocused toggleFloat
+    , win @> ctl @> xK_Escape @> confirmPrompt myXPConfig
+                                               "exit"
+                                               (io exitSuccess)
+    , win @> sft @> xK_Escape @> spawn_
+        "sleep 1; xset dpms force off && i3lock -n && xset dpms force on"
+    , win @> sft @> xK_p @> shellPrompt myXPConfig
     , win @> xK_Return @> spawn_ "kitty"
     , alt @> xK_w @> spawn_ "feh --randomize --bg-fill ~/pics/walls2/*"
     , alt @> xK_s @> spawnOn "5" "steam"
     , alt @> xK_q @> spawn_ "qutebrowser"
     , alt @> xK_f @> spawn_ "firefox"
-    , alt @> xK_d @> spawn_ "rofi -show run -location 2 -yoffset 18"
+    , alt @> xK_d @> spawn_ "rofi -show drun"
     , alt @> xK_n @> spawn_ "thunar"
+    {-# OPTIONS_GHC -Wno-deprecations #-}
     , win @> xK_grave @> namedScratchpadAction scratchpads "ncmpcpp"
     , xF86XK_AudioPlay @> spawn_ "mpc toggle"
     , xF86XK_AudioPrev @> spawn_ "mpc prev"
@@ -180,13 +184,25 @@ instance Bindable KeySym where
 
 instance Semigroup Binding where
     (Binding maskA symA actionA) <> (Binding maskB symB actionB) =
-        Binding (maskA .|. maskB) (symA *> symB) (actionA *> actionB)
+        Binding (maskA .|. maskB) (accJust symA symB) (accJust actionA actionB)
+
+accJust :: Maybe a -> Maybe a -> Maybe a
+accJust _        (Just a) = Just a
+accJust (Just a) Nothing  = Just a
+accJust _        _        = Nothing
 
 ctl = controlMask
 win = mod4Mask
 alt = mod1Mask
 sft = shiftMask
 nomod = noModMask
+
+toggleFloat :: Window -> X ()
+toggleFloat w = windows
+    (\s -> if M.member w (W.floating s)
+        then W.sink w s
+        else (W.float w (W.RationalRect (1 / 3) (1 / 4) (1 / 2) (1 / 2)) s)
+    )
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -231,12 +247,12 @@ myManageHook =
             ]
         <+> namedScratchpadManageHook scratchpads
 
-myLogHook =
-    namedScratchpadFilterOutWorkspacePP
-        <$> workspaceNamesPP customPP
+myLogHook xmobarH =
+    -- namedScratchpadFilterOutWorkspacePP <$>
+    workspaceNamesPP (customPP xmobarH)
         >>= dynamicLogString
         >>= xmonadPropLog
-        >>  fadeInactiveLogHook 0.85
+        -- >>  fadeInactiveLogHook 0.85
 
 lilFloater = customFloating $ W.RationalRect (1 / 4) (1 / 4) (1 / 2) (2 / 3)
 
@@ -264,7 +280,7 @@ darkRed = xmofg "#C5395A"
 
 xmofg = flip xmobarColor xmobarBG
 
-customPP = PP { ppCurrent          = darkCyan
+customPP xmobarH = (def :: PP) { ppCurrent          = darkCyan
               , ppVisible          = id
               , ppHidden           = id
               , ppVisibleNoWindows = Just show
@@ -278,5 +294,6 @@ customPP = PP { ppCurrent          = darkCyan
               , ppOrder            = id
               , ppSort             = getSortByIndex
               , ppExtras           = []
-              , ppOutput           = putStrLn . ("   " <>)
+              -- , ppOutput           = putStrLn . ("   " <>)
+              -- , ppOutput           = hPutStrLn xmobarH
               }
