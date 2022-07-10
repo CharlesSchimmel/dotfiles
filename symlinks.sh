@@ -10,7 +10,7 @@ if [[ -e $HOME/.vim ]]; then
 fi
 ln -s xinitrc $HOME/.xinitrc
 ln -s Xresources $HOME/.Xresources
-ln -s Xresources.d $HOME/.Xresources.d
+ln -s Xresources.d $HOME/
 ln -s zshrc $HOME/.zshrc
 
 mkdir -p $HOME/.config/kitty
