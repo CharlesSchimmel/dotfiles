@@ -1,12 +1,25 @@
 #!/usr/bin/bash
 
-ln -s $HOME/dots/aliases $HOME/.aliases
-ln -s $HOME/dots/inputrc $HOME/.inputrc
-ln -s $HOME/dots/vimrc $HOME/.vimrc
+pushd "$(dirname "$0")"
+
+ln -s aliases $HOME/.aliases
+ln -s inputrc $HOME/.inputrc
+ln -s vimrc $HOME/.vimrc
 if [[ -e $HOME/.vim ]]; then
-    ln -s $HOME/dots/vim/ftplugin $HOME/.vim/ftplugin
+    ln -s vim/ftplugin $HOME/.vim/ftplugin
 fi
-ln -s $HOME/dots/xinitrc $HOME/.xinitrc
-ln -s $HOME/dots/Xresources $HOME/.Xresources
-ln -s $HOME/dots/Xresources.d $HOME/.Xresources.d
-ln -s $HOME/dots/zshrc $HOME/.zshrc
+ln -s xinitrc $HOME/.xinitrc
+ln -s Xresources $HOME/.Xresources
+ln -s Xresources.d $HOME/.Xresources.d
+ln -s zshrc $HOME/.zshrc
+
+mkdir -p $HOME/.config/kitty
+ln -s kitty $HOME/.config/
+
+mkdir -p $HOME/.config/rofi
+ln -s rofi $HOME/.config/
+
+mkdir -p $HOME/.config/xmonad
+ln -s xmonad/* $HOME/.config/xmonad/
+
+popd
