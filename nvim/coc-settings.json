@@ -1,0 +1,43 @@
+{
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": ["css","hs", "haskell"],
+  "languageserver": {
+    "haskell": {
+      "trace.server": "messages",
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": ["*.cabal", ".stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
+      "initializationOptions": {},
+      "settings": {
+        "languageServerHaskell": {
+          "formattingProvider": "brittany",
+          "hlintOn": true,
+          "maxNumberOfProblems": 10,
+          "completionSnippetsOn": true
+        }
+      }
+    }, 
+    "ccls": {
+        "command": "ccls",
+        "filetypes": [
+            "c",
+            "cpp",
+            "objc",
+            "objcpp"
+        ],
+        "rootPatterns": [
+            ".ccls",
+            "compile_commands.json",
+            ".vim/",
+            ".git/",
+            ".hg/"
+        ],
+        "initializationOptions": {
+            "cache": {
+                "directory": "/tmp/ccls"
+            }
+        }
+    }
+  }
+}

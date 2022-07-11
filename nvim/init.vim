@@ -104,8 +104,8 @@ autocmd FileType netrw setl bufhidden=wipe
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-source $HOME/.vim/plugin-settings/airline.vim
-source $HOME/.vim/plugin-settings/coc.vim
-source $HOME/.vim/plugin-settings/fzf.vim
-source $HOME/.vim/plugin-settings/tmux-navigator.vim
-source $HOME/.vim/plugin-settings/vimwiki.vim
+source $HOME/.config/nvim/plugin-settings/airline.vim
+source $HOME/.config/nvim/plugin-settings/coc.vim
+source $HOME/.config/nvim/plugin-settings/fzf.vim
+source $HOME/.config/nvim/plugin-settings/tmux-navigator.vim
+source $HOME/.config/nvim/plugin-settings/vimwiki.vim

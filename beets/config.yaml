@@ -1,0 +1,35 @@
+directory: /media/music/mus/
+library: /media/music/mus/musiclibrary.db
+import:
+    languages: en
+    copy: yes
+    move: no
+
+plugins: duplicates scrub fetchart embedart
+
+# copyartifacts
+
+embedart:
+    maxwidth: 450
+
+paths:
+    ext:log: $albumpath/$artist - $album
+    ext:cue: $albumpath/$artist - $album
+    ext:jpg: $albumpath/$artist - $album
+    ext:m3u: $albumpath/$artist - $album
+
+fetchart:
+    auto:
+        yes
+
+scrub:
+    auto:
+        yes
+
+duplicates:
+    tiebreak:
+        items: [format,bitrate]
+        albums: [format,bitrate]
+
+copyartifacts:
+    extensions: .*
