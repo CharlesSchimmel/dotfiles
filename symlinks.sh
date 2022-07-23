@@ -27,4 +27,7 @@ ln -s $PWD/nvim/* $HOME/.config/nvim/
 
 ln -s $PWD/stalonetrayrc $HOME/.stalonetrayrc
 
+mkdir -p $HOME/.config/dunst
+ln -s $PWD/dunst/* $HOME/.config/dunst/
+
 popd
