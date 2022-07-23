@@ -25,4 +25,6 @@ ln -s $PWD/beets/* $HOME/.config/beets/
 mkdir -p $HOME/.config/nvim
 ln -s $PWD/nvim/* $HOME/.config/nvim/
 
+ln -s $PWD/stalonetrayrc $HOME/.stalonetrayrc
+
 popd
