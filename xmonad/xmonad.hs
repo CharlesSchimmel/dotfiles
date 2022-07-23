@@ -88,11 +88,9 @@ main = do
         `additionalKeys` keybindings
 
 keybindings :: [((KeyMask, KeySym), X ())]
-keybindings = mapMaybe fromBinding bindings_
+keybindings = extraWorkspaceKeys ++ mapMaybe fromBinding bindings_
 bindings_ =
     [ win @> sft @> xK_q @> (pure () :: X ()) -- override
-    -- https://stackoverflow.com/questions/27742421
-    , win @> xK_0 @> (windows . W.greedyView $ myWorkspaces !! 9)
     , win @> xK_l @> windows W.focusDown
     , win @> xK_h @> windows W.focusUp
     , win @> sft @> xK_l @> windows W.swapDown
@@ -263,8 +261,17 @@ scratchpads =
          lilFloater
     ]
 
+-- https://stackoverflow.com/questions/27742421
+extraWorkspaceKeys =
+    [ ((win, key), windows $ W.greedyView ws) | (key, ws) <- extraWorkspaces ]
+    ++ [ ((win .|. shiftMask, key), (windows $ W.shift ws))
+       | (key, ws) <- extraWorkspaces
+       ]
+
+extraWorkspaces = [(xK_0, "0")]
+
 myWorkspaces :: [String]
-myWorkspaces = " " : (map show [2 .. 9 :: Int]) ++ ["0"]
+myWorkspaces = " " : map show [2 .. 9 :: Int] ++ map snd extraWorkspaces
 
 xmobarFG = "#e7e8eb"
 
