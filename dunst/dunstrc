@@ -147,6 +147,8 @@
 
     # Paths to default icons.
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    frame_width = 2
+    frame_color = "#5AB4F6"
 
 [frame]
     width = 0
