@@ -28,6 +28,7 @@ bindkey '[B' down-line-or-beginning-search
 bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
+bindkey '' history-incremental-pattern-search-backward
 set -o ignoreeof
 
 # ???

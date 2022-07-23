@@ -99,18 +99,19 @@ bindings_ =
     , win @> xK_Right @> windows W.focusDown
     , win @> sft @> xK_Left @> windows W.swapUp
     , win @> sft @> xK_Right @> windows W.swapDown
-    , win @> xK_f @> sendMessage (Toggle "Full")
-    , win @> ctl @> xK_l @> sendMessage Expand
-    , win @> ctl @> xK_h @> sendMessage Shrink
-    , win @> xK_p @> shellPrompt myXPConfig
-    , win @> xK_z @> withFocused toggleFloat
-    , win @> ctl @> xK_Escape @> confirmPrompt myXPConfig
-                                               "exit"
-                                               (io exitSuccess)
     , win @> sft @> xK_Escape @> spawn_
         "sleep 1; xset dpms force off && i3lock -n && xset dpms force on"
     , win @> sft @> xK_p @> shellPrompt myXPConfig
+    , win @> xK_f @> sendMessage (Toggle "Full")
+    , win @> xK_p @> shellPrompt myXPConfig
+    , win @> xK_z @> withFocused toggleFloat
+    , win @> ctl @> xK_l @> sendMessage Expand
+    , win @> ctl @> xK_h @> sendMessage Shrink
+    , win @> ctl @> xK_Escape @> confirmPrompt myXPConfig
+                                               "exit"
+                                               (io exitSuccess)
     , win @> xK_Return @> spawn_ "kitty"
+    , win @> xK_grave @> namedScratchpadAction scratchpads "ncmpcpp"
     , alt @> xK_w @> spawn_ "feh --randomize --bg-fill ~/pics/walls2/*"
     , alt @> xK_s @> spawnOn "5" "steam"
     , alt @> xK_q @> spawn_ "qutebrowser"
@@ -118,7 +119,6 @@ bindings_ =
     , alt @> xK_d @> spawn_ "rofi -show drun"
     , alt @> xK_n @> spawn_ "thunar"
     {-# OPTIONS_GHC -Wno-deprecations #-}
-    , win @> xK_grave @> namedScratchpadAction scratchpads "ncmpcpp"
     , xF86XK_AudioPlay @> spawn_ "mpc toggle"
     , xF86XK_AudioPrev @> spawn_ "mpc prev"
     , xF86XK_AudioNext @> spawn_ "mpc next"
