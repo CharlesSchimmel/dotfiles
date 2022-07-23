@@ -83,6 +83,7 @@ main = do
                         , workspaces         = myWorkspaces
                         , focusedBorderColor = darkCyanHex
                         , normalBorderColor  = xmobarBG
+                        , terminal           = "kitty"
                         }
         `additionalKeys` keybindings
 
@@ -90,7 +91,8 @@ keybindings :: [((KeyMask, KeySym), X ())]
 keybindings = mapMaybe fromBinding bindings_
 bindings_ =
     [ win @> sft @> xK_q @> (pure () :: X ()) -- override
-    , win @> xK_0 @> (windows . W.view $ myWorkspaces !! 10)
+    -- https://stackoverflow.com/questions/27742421
+    , win @> xK_0 @> (windows . W.greedyView $ myWorkspaces !! 9)
     , win @> xK_l @> windows W.focusDown
     , win @> xK_h @> windows W.focusUp
     , win @> sft @> xK_l @> windows W.swapDown
@@ -249,9 +251,7 @@ myManageHook =
 
 myLogHook xmobarH =
     -- namedScratchpadFilterOutWorkspacePP <$>
-    workspaceNamesPP (customPP xmobarH)
-        >>= dynamicLogString
-        >>= xmonadPropLog
+    workspaceNamesPP (customPP xmobarH) >>= dynamicLogString >>= xmonadPropLog
         -- >>  fadeInactiveLogHook 0.85
 
 lilFloater = customFloating $ W.RationalRect (1 / 4) (1 / 4) (1 / 2) (2 / 3)
@@ -263,10 +263,8 @@ scratchpads =
          lilFloater
     ]
 
-myWorkspaces = map show' [1 .. 10 :: Int] <> ["_"]
-  where
-    show' 10 = "0"
-    show' x  = show x
+myWorkspaces :: [String]
+myWorkspaces = " " : (map show [2 .. 9 :: Int]) ++ ["0"]
 
 xmobarFG = "#e7e8eb"
 
@@ -281,19 +279,19 @@ darkRed = xmofg "#C5395A"
 xmofg = flip xmobarColor xmobarBG
 
 customPP xmobarH = (def :: PP) { ppCurrent          = darkCyan
-              , ppVisible          = id
-              , ppHidden           = id
-              , ppVisibleNoWindows = Just show
-              , ppHiddenNoWindows  = const ""
-              , ppUrgent           = darkRed
-              , ppSep              = " : "
-              , ppWsSep            = "   "
-              , ppTitle            = const ""
-              , ppTitleSanitize    = id
-              , ppLayout           = const ""
-              , ppOrder            = id
-              , ppSort             = getSortByIndex
-              , ppExtras           = []
+                               , ppVisible          = id
+                               , ppHidden           = id
+                               , ppVisibleNoWindows = Just show
+                               , ppHiddenNoWindows  = const ""
+                               , ppUrgent           = darkRed
+                               , ppSep              = " : "
+                               , ppWsSep            = "   "
+                               , ppTitle            = const ""
+                               , ppTitleSanitize    = id
+                               , ppLayout           = const ""
+                               , ppOrder            = id
+                               , ppSort             = getSortByIndex
+                               , ppExtras           = []
               -- , ppOutput           = putStrLn . ("   " <>)
               -- , ppOutput           = hPutStrLn xmobarH
-              }
+                               }
