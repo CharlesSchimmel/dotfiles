@@ -1,0 +1,77 @@
+;;                               Configuration for most TKL keyboards
+;;                       use this if you need numeric keypad in some scenarios
+;;                   binded as numpad keys (not just numerics) for alt-codes input
+
+(defcfg
+  ;; ** For Linux **
+  ;; input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd") ;; Change this line for your device
+  input  (device-file "/dev/input/event4") ;; Change this line for your device
+  ;; input  (device-file "/dev/input/by-id/usb-Matias_Ergo_Pro_Keyboard-event-kbd")
+  output (uinput-sink "KMonad output")
+
+  ;; ** For Windows **
+  ;; input  (low-level-hook)
+  ;; output (send-event-sink)
+
+  ;; ** For MacOS **
+  ;; input  (iokit-name "my-keyboard-product-string")
+  ;; output (kext)
+
+  fallthrough true
+)
+
+(defalias
+  esctl (tap-hold-next-release 175 esc lctl)
+  shtab (tap-hold-next-release 175 tab lsft)
+  bshp (tap-hold-next-release 175 bspc rsft)
+  w_; (tap-hold-next-release 175 ; lmet)
+  a_q (tap-hold-next-release 175 q lalt)
+  s_j (tap-hold-next-release 175 j lsft)
+  c_k (tap-hold-next-release 175 k lctl)
+  w_z (tap-hold-next-release 175 z rmet)
+  a_v (tap-hold-next-release 175 v ralt)
+  s_w (tap-hold-next-release 175 w rsft)
+  c_m (tap-hold-next-release 175 m rctl)
+  sw (sticky-key 500 lmet)
+  sa (sticky-key 500 lalt)
+  ss (sticky-key 500 lsft)
+  sc (sticky-key 500 lctl)
+  def  (tap-macro nlck (layer-switch dvorak)) ;; Bind 'def' to dvorak Layer
+  symspc (tap-hold-next-release 175 spc (layer-toggle sym))
+)
+
+(defsrc
+  esc     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  prnt ins del
+  grv      1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab      q    w    e    r    t    y    u    i    o    p    [    ]    bksl
+  caps     a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft     z    x    c    v    b    n    m    ,    .    /    rsft    up
+  lctl    lmet lalt           spc              ralt rctl    left    down    right
+)
+ 
+(deflayer dvorak
+  esc    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  prnt ins del
+  grv     1    2    3    4    5    6    7    8    9    0    [    ]    bspc
+  tab     '    ,    .    p    y    f    g    c    r    l    /    =    bksl
+  @esctl   a    o    e    u    i    d    h    t    n    s    -   ret
+  @shtab     @w_;  @a_q  @s_j  @c_k  x    b  @c_m  @s_w  @a_v  @w_z    @bshp    up
+  lctl    lmet lalt         @symspc            ralt rctl    left    down    right
+)
+
+(deflayer sym
+  _ _  _  _  _  _ _ _  _  _  _  _   _ _ _ _
+  _ _  _  _  _  _ _ _  _  _  _  _   _ _
+  _ 1  2  3  4  5 6 7  8  9  0  _   _ _
+  _ [  <  \( {  - = }  \) >  ]  _   _
+  _ @sw @sa @ss @sc _ _ @sc @ss @sa @sw del _
+  _ _  _  _  _  _ _ _  _
+)
+;; 
+;; (deflayer numbers
+;;   _       _    _    _    _    _    _    _    _    _    _    _    _              _    _    _
+;;   _       7    8    9    _    _    _    _    _    _    _    _    _    _         _    _    _
+;;   _       4    5    6    _    _    _    _    _    _    _    _    _    _         _    _    _
+;;   _       1    2    3    _    _    _    _    _    _    _    _    _
+;;   _         0    _    _    _    _    _    _    _    _    _    _                      _
+;;   _       _    _                 _              _    _    _    _                _    _    _
+;; )

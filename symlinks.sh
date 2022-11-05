@@ -30,4 +30,8 @@ ln -s $PWD/stalonetrayrc $HOME/.stalonetrayrc
 mkdir -p $HOME/.config/dunst
 ln -s $PWD/dunst/* $HOME/.config/dunst/
 
+mkdir -p $HOME/.config/kmonad
+ln -s $PWD/kmonad/* $HOME/.config/kmonad/
+
+
 popd
