@@ -11,6 +11,15 @@ alias today="date +%y%m%d"
 
 
 # Git
+# use Windows' git when working under C:\ drive
+function git() {
+  if $(pwd -P | grep -q "^\/mnt\/c\/*"); then
+    '/mnt/c/Program Files/Git/cmd/git.exe' "$@"
+  else
+    command git "$@"
+  fi
+}
+
 alias cdg='cd "$(git rev-parse --show-toplevel)"'
 alias groot='git rev-parse --show-toplevel'
 alias thisgit="git rev-parse --abbrev-ref HEAD"
@@ -44,3 +53,5 @@ function git-backup () {
 alias checkin="git commit -m \"$(date +%y%m%d) checkin\""
 
 source "$HOME/.work-aliases"
+
+alias docfx='/mnt/c/ProgramData/chocolatey/bin/docfx.exe'

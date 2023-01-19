@@ -19,7 +19,7 @@ Plug 'junegunn/fzf.vim'                " fuzzy file finder
 " IDE ish
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'vimwiki/vimwiki'
+Plug 'charlesschimmel/vimwiki', {'branch': 'support-angle-bracket-escaped-markdown-urls'}
 
 " QoL
 Plug 'airblade/vim-gitgutter'          " Show git changes (+-~) in file
