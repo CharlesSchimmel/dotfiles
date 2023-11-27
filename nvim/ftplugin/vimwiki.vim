@@ -79,6 +79,7 @@ endfunction
 
 inoremap <c-l> <esc>:call MkNewLink()<cr>
 nnoremap <c-n><c-l> :call MkNewLink()<cr>
+inoremap <c-.> :call system(md-graph -l "/home/elpfen/zk" -d "/home/elpfen/md-graph.db" backlinks '%')<cr>
 
 hi link VimwikiLink blue
 

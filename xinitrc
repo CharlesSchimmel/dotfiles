@@ -39,11 +39,14 @@ xrandr --auto
 setxkbmap -option 'caps:ctrl_modifier'; xcape -e '#66=Escape'
 xcape -e 'Shift_R=BackSpace'
 xcape -e 'Shift_L=Tab'
+setxkbmap -layout dvorak
+touch /tmp/q_to_d
+$HOME/.local/bin/kmonad $HOME/.config/kmonad/elpfen.kbd &
 
 /usr/bin/prime-offload # initialize optimus-manager
 
-setxkbmap -layout dvorak
-touch /tmp/q_to_d
+xinput set-prop 12 322 1 # fix trackpad tap
+
 $HOME/.local/bin/xmonad
 # xfce4-session
 

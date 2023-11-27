@@ -1,6 +1,22 @@
 {
+  "tsserver.log": "verbose",
+  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v16.13.1/bin/npm",
+  "tsserver.implicitProjectConfig.experimentalDecorators": true,
+  "prettier.tslintIntegration": true,
+  "prettier.eslintIntegration": true,
   "coc.preferences.formatOnType": true,
-  "coc.preferences.formatOnSaveFiletypes": ["css","hs", "haskell"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "hs", "haskell",
+    "html",
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "css",
+    "scss",
+    "xml"
+  ],
   "languageserver": {
     "haskell": {
       "trace.server": "messages",
@@ -19,25 +35,25 @@
       }
     }, 
     "ccls": {
-        "command": "ccls",
-        "filetypes": [
-            "c",
-            "cpp",
-            "objc",
-            "objcpp"
-        ],
-        "rootPatterns": [
-            ".ccls",
-            "compile_commands.json",
-            ".vim/",
-            ".git/",
-            ".hg/"
-        ],
-        "initializationOptions": {
-            "cache": {
-                "directory": "/tmp/ccls"
-            }
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
         }
+      }
     }
   }
 }

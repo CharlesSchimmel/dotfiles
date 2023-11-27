@@ -37,7 +37,7 @@ set -o ignoreeof
 #   echo -ne "$window_title"
 # }
 
-export PATH=$PATH":$HOME/.local/bin:$HOME/.npm-global/bin"
+export PATH=$PATH":$HOME/.local/bin"
 export EDITOR='nvim'
 export GPODDER_HOME="/mnt/nas/Podcasts/"
 source $HOME/.aliases
