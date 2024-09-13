@@ -1,31 +1,16 @@
 {
-  "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
-  "prettier.tslintIntegration": true,
-  "prettier.eslintIntegration": true,
-  "coc.preferences.hoverTarget": "float",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "html",
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact",
-    "css",
-    "scss",
-    "xml"
-  ],
+  "coc.preferences.formatOnSave": true,
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": false,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
   "diagnostic.enable": true,
-  "diagnostic.messageTarget": "echo",
-  "suggest.enablePreview": true,
-  "suggest.maxPreviewWidth": 80,
-  "coc.preferences.previewAutoClose": true,
-  "coc.preferences.colorSupport": true,
+  "diagnostic.messageTarget": "float",
   "tsserver.log": "verbose",
-  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v16.16.0/bin/npm",
+  "npm.binPath": "/home/schimmch/.nvm/versions/node/v20.15.1/bin/npm",
+  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v20.15.1/bin/npm",
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "languageserver": {
     "haskell": {
@@ -41,5 +26,9 @@
         }
       }
     }
-  }
+  },
+  "angular.enable-strict-mode-prompt": false,
+  "angular.view-engine": true,
+  "suggest.localityBonus": true,
+  "prettier.arrowParens": "avoid"
 }

@@ -79,7 +79,13 @@ endfunction
 
 inoremap <c-l> <esc>:call MkNewLink()<cr>
 nnoremap <c-n><c-l> :call MkNewLink()<cr>
+inoremap <c-b><c-l> !md-graph -l ~/notes -d ~/notes/.md-graph.db backlinks "%"<cr>
 
 hi link VimwikiLink blue
 
 :GitGutterBufferDisable
+
+
+" Remap C-p from :GFiles to :Files, since my vimwiki folders aren't (usually)
+" Git repositories
+nnoremap <C-p> :Files<CR>
