@@ -9,8 +9,8 @@
   "diagnostic.enable": true,
   "diagnostic.messageTarget": "float",
   "tsserver.log": "verbose",
-  "npm.binPath": "/home/schimmch/.nvm/versions/node/v20.15.1/bin/npm",
-  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v20.15.1/bin/npm",
+  "npm.binPath": "/home/schimmch/.nvm/versions/node/v20.17.0/bin/npm",
+  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v20.17.0/bin/npm",
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "languageserver": {
     "haskell": {

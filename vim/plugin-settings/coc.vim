@@ -112,4 +112,4 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 set updatetime=300
 set signcolumn=yes
-let g:coc_node_path="/home/schimmch/.nvm/versions/node/v20.15.1/bin/node"
+let g:coc_node_path="/home/schimmch/.nvm/versions/node/v20.17.0/bin/node"
