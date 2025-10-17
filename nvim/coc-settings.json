@@ -1,9 +1,11 @@
 {
   "tsserver.log": "verbose",
-  "tsserver.npm": "/home/schimmch/.nvm/versions/node/v16.13.1/bin/npm",
+  "tsserver.npm": "/home/schimmch/.local/share/fnm/node-versions/v24.4.1/installation/bin/npm",
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "prettier.tslintIntegration": true,
   "prettier.eslintIntegration": true,
+  "npm.binPath": "/home/schimmch/.local/share/fnm/node-versions/v24.4.1/installation/bin/npm",
+  "tsserver.npm": "/home/schimmch/.local/share/fnm/node-versions/v24.4.1/installation/bin/npm",
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "hs", "haskell",
