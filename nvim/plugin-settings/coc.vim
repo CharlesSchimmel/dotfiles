@@ -23,6 +23,7 @@ set signcolumn=yes
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
+" This broke, I don't think I use it anyway
 " inoremap <silent><expr> <TAB>
 "       \ pumvisible() ? "\<C-n>" :
 "       \ <SID>check_back_space() ? "\<TAB>" :
@@ -71,6 +72,8 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
+" Did I remap this for some reason? Does leader cr do something else?
+" nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>cr <Plug>(coc-rename)
 
 " Formatting selected code.
