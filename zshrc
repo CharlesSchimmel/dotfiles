@@ -12,11 +12,8 @@ SAVEHIST=50000
 setopt appendhistory autocd extendedglob nomatch notify share_history
 bindkey -v
 
-# export GIT_PROMPT_EXECUTABLE="haskell"
-# source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 autoload -Uz promptinit && promptinit
 PROMPT='%F{cyan}%%%f '
-# RPROMPT='%~$(git_super_status)'
 RPROMPT='%~'
 
 autoload -U up-line-or-beginning-search down-line-or-beginning-search
@@ -33,26 +30,13 @@ bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completi
 bindkey '' history-incremental-pattern-search-backward
 set -o ignoreeof
 
-# ???
-# function precmd () {
-#   window_title="\033]0;${PWD##*/}\007"
-#   echo -ne "$window_title"
-# }
+setopt HIST_IGNORE_SPACE
 
 export PATH=$PATH":$HOME/.local/bin"
 export EDITOR='nvim'
-export GPODDER_HOME="/mnt/nas/Podcasts/"
 source $HOME/.aliases
-# source $HOME/.ghcup/env
-# source /usr/share/zsh/plugins/clipboard.zsh 
 source "$HOME/.local/share/lscolors.sh"
-# if [ -e /home/elpfen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/elpfen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting
-# source /usr/share/nvm/init-nvm.sh
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # fnm
 FNM_PATH="/home/smitty/.local/share/fnm"
