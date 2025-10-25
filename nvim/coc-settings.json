@@ -1,14 +1,10 @@
 {
-  "tsserver.log": "verbose",
-  "tsserver.npm": "/home/schimmch/.local/share/fnm/node-versions/v24.4.1/installation/bin/npm",
-  "tsserver.implicitProjectConfig.experimentalDecorators": true,
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20,
   "prettier.tslintIntegration": true,
   "prettier.eslintIntegration": true,
-  "npm.binPath": "/home/schimmch/.local/share/fnm/node-versions/v24.4.1/installation/bin/npm",
-  "tsserver.npm": "/home/schimmch/.local/share/fnm/node-versions/v24.4.1/installation/bin/npm",
-  "coc.preferences.formatOnType": true,
+  "coc.preferences.hoverTarget": "float",
   "coc.preferences.formatOnSaveFiletypes": [
-    "hs", "haskell",
     "html",
     "javascript",
     "typescript",
@@ -17,8 +13,22 @@
     "javascriptreact",
     "css",
     "scss",
-    "xml"
+    "xml",
+    "hs",
+    "haskell"
   ],
+  "diagnostic.errorSign": "•",
+  "diagnostic.warningSign": "•",
+  "diagnostic.infoSign": "•",
+  "diagnostic.enable": true,
+  "diagnostic.messageTarget": "echo",
+  "suggest.enablePreview": true,
+  "suggest.maxPreviewWidth": 80,
+  "coc.preferences.previewAutoClose": true,
+  "coc.preferences.colorSupport": true,
+  "tsserver.log": "verbose",
+  "tsserver.npm": "/home/hoyt/.nvm/versions/node/v20.11.1/bin/npm",
+  "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "languageserver": {
     "haskell": {
       "trace.server": "messages",

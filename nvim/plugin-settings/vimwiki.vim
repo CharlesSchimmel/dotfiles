@@ -1,6 +1,7 @@
 let g:vimwiki_auto_header = 0
 let g:vimwiki_list = [
     \ {'path': '~/win/zk', 'syntax': 'markdown', 'ext': 'md'},
+    \ {'path': '~/zk', 'syntax': 'markdown', 'ext': 'md'},
     \ {'path': '~/dox/sync-notes/', 'syntax': 'markdown', 'ext': 'md'}]
 " Without this option vimwiki will intereprate all .md files as vimwiki
 let g:vimwiki_global_ext = 0
@@ -9,7 +10,8 @@ let g:vimwiki_global_ext = 0
 " to replace spaces with underscores: 'links_space_char': '_'
 
 fun Template()
-    0r !~/win/zk/template.sh '%'
+    " 0r !~/win/zk/template.sh '%'
+    0r !~/zk/template.sh '%'
     exe '0,5fold'
 endfun
 nnoremap <leader>wz ggdip:call Template()<cr>
@@ -18,6 +20,11 @@ au BufNewFile ~/win/zk/*.md call Template()
 
 " from the helpfiles 'skeleton template'
 " if a file has 'updated:' in the first lines, update that with today's date
+au BufNewFile ~/zk/*.md call Template()
+
+" from the helpfiles 'skeleton template'
+" if a file has 'updated:' in the first lines, update that with today's date
+autocmd BufWritePre,FileWritePre ~/zk/*.md call UpdateLastMod()
 autocmd BufWritePre,FileWritePre ~/win/zk/*.md call UpdateLastMod()
 fun UpdateLastMod()
     let last_pos = getcurpos()

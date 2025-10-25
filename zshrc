@@ -7,16 +7,18 @@ zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit && compinit
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=5000
+SAVEHIST=5000
 setopt appendhistory autocd extendedglob nomatch notify share_history
 bindkey -v
 
 autoload -Uz promptinit && promptinit
 PROMPT='%F{cyan}%%%f '
+# PROMPT='%F{magenta}δ%f '
 RPROMPT='%~'
 
-autoload -U up-line-or-beginning-search down-line-or-beginning-search
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey '\eOc' forward-word # <C-{left,right}>

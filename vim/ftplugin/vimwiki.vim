@@ -1,4 +1,5 @@
 " set formatoptions=jcqorltwan " vimwiki plugin overrides this to jqltwan
+set formatoptions=jqltwan " vimwiki plugin overrides this to jqltwan
 set colorcolumn=80
 set expandtab
 set shiftwidth=4
@@ -63,7 +64,6 @@ function! MkNewLink()
   let name = input('Link title: ')
   if (!empty(name))
     let date = system('$HOME/.scripts/date62.sh')
-    " let date = system('$HOME/dots/scripts/date62.sh')
     let titled=substitute(name, "\\<\\w", "\\U\\0", "g")
     let sanitized=substitute(name, "[^a-zA-Z0-9-_ ]", "", "g")
     let filename = date.' '.sanitized
@@ -80,7 +80,6 @@ endfunction
 
 inoremap <c-l> <esc>:call MkNewLink()<cr>
 nnoremap <c-n><c-l> :call MkNewLink()<cr>
-inoremap <c-.> :call system(md-graph -l "$HOME/zk" -d "$HOME/zk/md-graph.db" backlinks '%')<cr>
 
 hi link VimwikiLink blue
 

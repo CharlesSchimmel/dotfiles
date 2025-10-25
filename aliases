@@ -1,19 +1,8 @@
-# Pacman
-alias pacs="sudo pacman -S"
-alias pacss="pacman -Ss"
-alias pacr="sudo pacman -R"
-alias pacsyu="sudo pacman -Syu"
-alias pacsyyu="sudo pacman -Syyu"
-
 # Common cli stuff
-alias mkpk="makepkg -cs"
 alias ls="ls -N --color"
 alias grep="grep --color=auto"
 alias sudo="sudo "
 alias adios="shutdown now"
-alias fk="urxvt & disown"
-alias dx="& disown && exit"
-alias xrload="xrdb -merge .Xresources"
 alias nv="nvim "
 alias tmux="tmux -2"
 
@@ -21,10 +10,6 @@ alias tmux="tmux -2"
 alias prv="rsync -rv --progress --append-verify"
 alias rra="rsync -r --append-verify"
 alias pra="rsync -r --progress --append-verify"
-
-# Applications
-alias zath="zathura"
-alias feh="feh -. --auto-rotate"
 
 # Git
 alias groot="git rev-parse --show-toplevel"
@@ -38,5 +23,4 @@ alias gd="git diff"
 alias gp="git push"
 alias gco="git checkout"
 alias glog="git log"
-alias resetdisplay="xrandr --output eDP-1 --off && xrandr --output eDP-1 --auto"
 alias random-port="echo $((1 + $RANDOM % 10000))"
