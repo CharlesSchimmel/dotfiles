@@ -13,8 +13,8 @@ if [ -z "$PWD/zshrc" ]; then
     cp $PWD/zshrc $HOME/.zshrc
 fi
 
-# mkdir -p $HOME/.config/kitty
-# ln -s $PWD/kitty $HOME/.config/
+mkdir -p $HOME/.local/share/
+ln -s $PWD/lscolors.sh $HOME/.local/share/lscolors.sh
 
 # mkdir -p $HOME/.config/rofi
 # ln -s $PWD/rofi $HOME/.config/
