@@ -9,7 +9,7 @@ pushd "$(dirname "$0")"
 # ln -s $PWD/Xresources $HOME/.Xresources
 # ln -s $PWD/Xresources.d $HOME/
 ln -s $PWD/zshrc-common $HOME/.zshrc-common
-if [ -z "$PWD/zshrc" ]; then
+if [ ! -e "$HOME/.zshrc" ]; then
     cp $PWD/zshrc $HOME/.zshrc
 fi
 

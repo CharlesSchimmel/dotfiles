@@ -1,6 +1,6 @@
 source "$HOME/.zshrc-common"
 
-PROMPT='%F{cyan}%m%%%f '
+PROMPT='%F{cyan}%%%f '
 
 # fnm
 FNM_PATH="$HOME/.local/share/fnm"
