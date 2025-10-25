@@ -57,5 +57,13 @@
         }
       }
     }
+  },
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/tasks.json": [
+      "**/ansible/**/tasks/*.yml",
+      "**/ansible/**/tasks/*.yaml",
+      "**/ansible/**/handlers/*.yml",
+      "**/ansible/**/handlers/*.yaml"
+    ]
   }
 }
