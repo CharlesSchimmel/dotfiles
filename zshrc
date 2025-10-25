@@ -12,19 +12,21 @@ SAVEHIST=50000
 setopt appendhistory autocd extendedglob nomatch notify share_history
 bindkey -v
 
-export GIT_PROMPT_EXECUTABLE="haskell"
-source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+# export GIT_PROMPT_EXECUTABLE="haskell"
+# source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 autoload -Uz promptinit && promptinit
 PROMPT='%F{cyan}%%%f '
-RPROMPT='%~$(git_super_status)'
+# RPROMPT='%~$(git_super_status)'
+RPROMPT='%~'
 
 autoload -U up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey '\eOc' forward-word # <C-{left,right}>
 bindkey '\eOd' backward-word
+bindkey 'OA' up-line-or-beginning-search # up and down - for completing past commands
 bindkey '[A' up-line-or-beginning-search # up and down - for completing past commands
-bindkey '[B' down-line-or-beginning-search
+bindkey 'OB' down-line-or-beginning-search
 bindkey '[7~' beginning-of-line # Home, End
 bindkey '[8~' end-of-line
 bindkey '^[[Z' reverse-menu-complete # '^[[Z' <S-TAB> for reversing tab completions
@@ -41,9 +43,20 @@ export PATH=$PATH":$HOME/.local/bin"
 export EDITOR='nvim'
 export GPODDER_HOME="/mnt/nas/Podcasts/"
 source $HOME/.aliases
-source $HOME/.ghcup/env
-source /usr/share/zsh/plugins/clipboard.zsh 
+# source $HOME/.ghcup/env
+# source /usr/share/zsh/plugins/clipboard.zsh 
 source "$HOME/.local/share/lscolors.sh"
 # if [ -e /home/elpfen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/elpfen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting
-source /usr/share/nvm/init-nvm.sh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Must remain at bottom - fish style syntax highlighting
+# source /usr/share/nvm/init-nvm.sh
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# fnm
+FNM_PATH="/home/smitty/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
