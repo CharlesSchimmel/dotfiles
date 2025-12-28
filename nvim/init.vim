@@ -18,6 +18,8 @@ Plug 'junegunn/fzf.vim'                " fuzzy file finder
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
+" Plug 'junegunn/goyo.vim'               " Focused writing mode
+
 
 " QoL
 Plug 'airblade/vim-gitgutter'          " Show git diffs in file
@@ -27,14 +29,21 @@ Plug 'junegunn/vim-easy-align'         " align stuff
 Plug 'vim-airline/vim-airline'         " Betterer statusline
 Plug 'vim-airline/vim-airline-themes'  " WIS
 Plug 'vim-scripts/restore_view.vim'    " restores cursor position and folds
+Plug 'michaeljsmith/vim-indent-object' " Treat indent levels as text objects (cii - change inside indent). Essential for Haskell and Python
 
 " Tidal
-Plug 'davidgranstrom/scnvim', { 'do': {-> scnvim#install() } }
-Plug 'tidalcycles/vim-tidal'
+" Plug 'davidgranstrom/scnvim', { 'do': {-> scnvim#install() } }
+" Plug 'tidalcycles/vim-tidal'
 
-" Candy
-Plug 'ghifarit53/tokyonight-vim'
-Plug 'junegunn/goyo.vim'
+" Colorschemes and Ornamentation
+Plug 'sainnhe/sonokai'
+Plug 'sainnhe/edge'
+" Plug 'ghifarit53/tokyonight-vim'
+Plug 'sainnhe/everforest'         " Good with adjustments to background and foreground colors
+" Plug 'morhetz/gruvbox'            " Too low contrast, don't like yellow text
+" Plug 'joshdick/onedark.vim'       " Basic, not bad. Could be higher contrast
+Plug 'sainnhe/gruvbox-material'   " Too low contrast, don't like the yellow text
+" Plug 'rebelot/kanagawa.nvim'      " Not bad, yellow text though
 
 call plug#end()                 " required
 
@@ -76,10 +85,31 @@ syntax on
 
 " === Colors ===
 set bg=dark
-set termguicolors
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
 
-colorscheme tokyonight
-let g:tokyonight_style = 'storm'
+
+" colorscheme tokyonight
+" let g:tokyonight_style = 'storm' " moon, storm, night, day
+" let g:everforest_background = 'hard' " sets contrast. hard, medium, soft
+let g:airline_theme = 'sonokai'
+colorscheme sonokai
+
+let g:gruvbox_material_background = 'hard' " 'hard', 'medium', 'soft'
+" colorscheme papercolor
 
 " === Bindings ===
 " create file under cursor if it does not exist

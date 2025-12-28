@@ -15,6 +15,7 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
 " Word completion with custom spec with popup layout option
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
 
+nnoremap <C-S-g> :Rg<CR>
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number -- '.fzf#shellescape(<q-args>),
@@ -25,11 +26,11 @@ command! -bang -nargs=* GGrep
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
-autocmd! FileType fzf
-autocmd FileType fzf set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+" autocmd! FileType fzf
+" autocmd FileType fzf set laststatus=0 noshowmode noruler
+"     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 "   Use :Fzfc to view changed git files
-command! Fzfc call fzf#run(fzf#wrap( {'source': 'git ls-files --exclude-standard --others --modified'}))
+" command! Fzfc call fzf#run(fzf#wrap( {'source': 'git ls-files --exclude-standard --others --modified'}))
 
 " Use FZF to find a file and insert it
 " https://www.edwinwenink.xyz/posts/48-vim_fast_creating_and_linking_notes/

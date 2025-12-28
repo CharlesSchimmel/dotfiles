@@ -1,6 +1,6 @@
 {
   "suggest.echodocSupport": true,
-  "suggest.maxCompleteItemCount": 20,
+  "suggest.maxCompleteItemCount": 256,
   "prettier.tslintIntegration": true,
   "prettier.eslintIntegration": true,
   "coc.preferences.hoverTarget": "float",
@@ -21,7 +21,9 @@
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
   "diagnostic.enable": true,
-  "diagnostic.messageTarget": "echo",
+  "diagnostic.messageTarget": "float",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.messageLevel": "information",
   "suggest.enablePreview": true,
   "suggest.maxPreviewWidth": 80,
   "coc.preferences.previewAutoClose": true,
@@ -29,6 +31,7 @@
   "tsserver.log": "verbose",
   "tsserver.npm": "/home/hoyt/.nvm/versions/node/v20.11.1/bin/npm",
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
+
   "languageserver": {
     "haskell": {
       "trace.server": "messages",
@@ -39,7 +42,7 @@
       "initializationOptions": {},
       "settings": {
         "languageServerHaskell": {
-          "formattingProvider": "brittany",
+          "formattingProvider": "ormolu",
           "hlintOn": true,
           "maxNumberOfProblems": 10,
           "completionSnippetsOn": true

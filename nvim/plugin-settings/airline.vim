@@ -1,4 +1,4 @@
-let g:airline_theme = "tokyonight"
+let g:airline_theme = "sonokai"
 let g:airline#extensions#coc#enabled = 1
 let g:airline_mode_map = {
         \ '__':    '-',
